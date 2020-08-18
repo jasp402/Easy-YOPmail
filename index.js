@@ -79,7 +79,4 @@ const readMail = (url) => {
 
 module.exports = inbox;
 module.exports = readMail;
-let tempMail = createMail();
-tempMail.then(response => {
-    console.log(response);
-})
+module.exports = createMail;
