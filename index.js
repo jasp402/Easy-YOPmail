@@ -21,11 +21,14 @@ const searchToObject = url => {
     const entries = new Map(array);
     return Object.fromEntries(entries);
 };
-function stripHtml(html)
-{
-    var tmp = document.createElement("DIV");
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || "";
+
+const createMail = ()=>{
+    return request.get(`http://www.yopmail.com/es/email-generator.php`)
+        .then(result => {
+            const $     = cheerio.load(result);
+            return $('#login').val();
+
+        });
 }
 
 const inbox = (id, phrase, p = 1) => {
@@ -76,3 +79,7 @@ const readMail = (url) => {
 
 module.exports = inbox;
 module.exports = readMail;
+let tempMail = createMail();
+tempMail.then(response => {
+    console.log(response);
+})
