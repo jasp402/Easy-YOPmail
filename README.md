@@ -1,5 +1,11 @@
 # Easy-YOPmail
 
+<p align="center">
+    <a href="https://www.npmjs.com/package/Easy-YOPmail">
+        <img alt="npm" src="https://img.shields.io/npm/v/easy-yopmail.svg?logo=npm">
+    </a>
+</p>
+
 > ℹ️ **IMPORTANTE:** Easy-YOPmail o "YOPmail facil". (Por su traducción directa) Es un actualizacion del trabajo hecho por [diorahman](https://github.com/diorahman).
 En su proyecto [yopmail](https://github.com/diorahman/yopmail). Es una versión de hace bastate tiempo y con algunos detalles. Por lo que tome la iniciativa de crear una version un poco más completa, actualizada y con soporte. 
 
