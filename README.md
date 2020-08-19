@@ -23,13 +23,19 @@ cuenta con herramientas como:
 *Correo electrónico enviado a un suplente de dominio va a yopmail.com!*
 
 ## Que es Easy-YOPmail?
-Easy-YOPmail, surge de la necesidad de generar E-mail desechable
+Easy-YOPmail, surge de la necesidad de generar E-mail desechable dentro de un proyecto de NodeJS. En que se pueda consultar su inbox y leer el contenido de los correos. 
+
+Esta liberia cuenta con 3 funciones basicas:
+- [x] Generar correos
+- [x] Obtener el inbox de un correo
+- [x] Leer un correos
 
 
-## Empezando
+## Empecemos
 Esta es una libreria para **[NodeJS](https://nodejs.org/en/)**. por lo que facilmente puede hacer uso de **[npm](https://www.npmjs.com/)** para instalar la depencia en su proyecto.
 ```
 npm i easy-yopmail
 ```
+
 
 
