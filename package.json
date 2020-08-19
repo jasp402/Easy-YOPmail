@@ -1,6 +1,6 @@
 {
   "name": "easy-yopmail",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "description": "generate random mail using http://yopmail.com",
   "main": "index.js",
   "scripts": {
@@ -13,8 +13,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "request-promise": "^4.2.6",
     "cheerio": "^1.0.0-rc.3",
-    "request": "^2.88.2"
+    "node-fetch": "latest"
   }
 }
