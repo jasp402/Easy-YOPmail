@@ -22,15 +22,17 @@ const searchToObject = url => {
     return Object.fromEntries(entries);
 };
 
+/* Create a random mail */
 const createMail = ()=>{
     return request.get(`http://www.yopmail.com/es/email-generator.php`)
         .then(result => {
-            const $     = cheerio.load(result);
+            const $ = cheerio.load(result);
             return $('#login').val();
 
         });
 }
 
+/* Get inbox mail */
 const inbox = (id, phrase, p = 1) => {
     return request.get(`http://m.yopmail.com/en/inbox.php?login=${id}&p=${p}&d=&ctrl=&scrl=&spam=${SPAM}&yf=005&yp=${YP}&yj=${YJ}&v=${V}&r_c=&id=`)
         .then((result) => {
@@ -59,9 +61,9 @@ const inbox = (id, phrase, p = 1) => {
         });
 };
 
+/* Read mail by url */
 const readMail = (url) => {
     let params = searchToObject(url);
-    console.log(params);
     let headers = {
         'Content-Type': 'application/json',
         'Cookie'      : `compte=${params.b}; ys=${YS}; yc=${YC}`
@@ -76,7 +78,8 @@ const readMail = (url) => {
         });
 };
 
-
-module.exports = inbox;
-module.exports = readMail;
-module.exports = createMail;
+module.exports = {
+    inbox     : inbox,
+    readMail  : readMail,
+    createMail: createMail
+};
