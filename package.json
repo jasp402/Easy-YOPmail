@@ -1,6 +1,6 @@
 {
   "name": "easy-yopmail",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "generate random mail using http://yopmail.com",
   "main": "index.js",
   "scripts": {
@@ -11,11 +11,9 @@
     "email": "jasp402@gmail.com",
     "url": "http://jasp402.com/"
   },
-  "license": "ISC",
-  "devDependencies": {
-    "request-promise": "^4.2.6"
-  },
+  "license": "MIT",
   "dependencies": {
+    "request-promise": "^4.2.6",
     "cheerio": "^1.0.0-rc.3",
     "request": "^2.88.2"
   }
