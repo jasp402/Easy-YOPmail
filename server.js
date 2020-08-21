@@ -1,21 +1,18 @@
 const YOPmail  = require('./lib');
-let express    = require('express');
-let app        = express();
+let express = require('express');
+let server  = express();
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
-app.listen(port, function () {
-    console.log('Example app listening on port 5000!');
-});
 
-app.get('/api/getmail', function (req, res) {
+server.get('/api/getmail', function (req, res) {
     const petition = YOPmail.createMail();
     petition.then(response => {
         res.send(response);
     })
 });
 
-app.get('/api/getinbox/:mail', function (req, res) {
+server.get('/api/getinbox/:mail', function (req, res) {
     let email = undefined;
     let query = '';
     if((req.params.mail).indexOf('@')>-1){
@@ -36,7 +33,7 @@ app.get('/api/getinbox/:mail', function (req, res) {
     });
 });
 
-app.get('/api/readmail/:mail/:id', function (req, res) {
+server.get('/api/readmail/:mail/:id', function (req, res) {
     let url = 'http://m.yopmail.com/en/m.php?';
     if(req.params.mail && req.params.id){
         url += `b=${req.params.mail}&id=${req.params.id}`
@@ -48,4 +45,8 @@ app.get('/api/readmail/:mail/:id', function (req, res) {
     petition.then(response => {
         res.end(response);
     })
+});
+
+server.listen(port, function () {
+    console.log('Example app listening on port:', port);
 });
