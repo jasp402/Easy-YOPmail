@@ -1,10 +1,10 @@
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+const jsPackTools = require('js-packtools')();
+const fs = require('fs');
 
 const YP   = 'KZGH0AwL1ZmRkZmR3ZQp1AQZ';
 const YJ   = 'TZGZmZmp3ZQx1ZwR1ZGpkZmR';
-const YS   = 'YZwH3BGL1BGD1AQRjZwR0AmH';
-const YC   = 'HAQZjZGN4AGVmAwN1AGH4Zwt';
 const SPAM = 'true';
 const V    = '3.1';
 
@@ -24,10 +24,20 @@ const searchToObject = url => {
 
 /* Create a random mail */
 const createMail = async () => {
-    const response = await fetch(`http://www.yopmail.com/es/email-generator.php`);
-    const body     = await response.text();
-    const $        = cheerio.load(body);
-    return await $('#login').val();
+    try {
+        const response = await fetch(`http://www.yopmail.com/es/email-generator.php`);
+
+        //save current cookies
+        jsPackTools.validateDir('./temp');
+        const cookies = response.headers.get('set-cookie');
+        fs.writeFileSync('./temp/cookies.tmp', cookies, 'utf-8');
+
+        const body     = await response.text();
+        const $        = cheerio.load(body);
+        return await $('#login').val();
+    } catch(err) {
+        alert(err); // Failed to fetch
+    }
 };
 
 /* Get inbox mail */
@@ -36,6 +46,12 @@ const inbox = async (id, phrase, p = 1) => {
     let found = false;
 
     const response = await fetch(`http://m.yopmail.com/en/inbox.php?login=${id}&p=${p}&d=&ctrl=&scrl=&spam=${SPAM}&yf=005&yp=${YP}&yj=${YJ}&v=${V}&r_c=&id=`);
+
+    //save or update current cookies
+    jsPackTools.validateDir('./temp');
+    const cookies = response.headers.get('set-cookie');
+    fs.writeFileSync('./temp/cookies.tmp', cookies, 'utf-8');
+
     const body     = await response.text();
     const $        = cheerio.load(body);
 
@@ -46,6 +62,7 @@ const inbox = async (id, phrase, p = 1) => {
             when   : el.find('.lmh').text(),
             from   : el.find('.lmf').text(),
             subject: el.find('.lms_m').text(),
+            id     : el.attr('href').split('id=')[1],
             href   : 'http://m.yopmail.com/en/' + el.attr('href'),
             html   : el.html()
         });
@@ -62,9 +79,13 @@ const inbox = async (id, phrase, p = 1) => {
 /* Read mail by url */
 const readMail = async (url) => {
     let params = searchToObject(url);
+    let rawCookies = fs.readFileSync('./temp/cookies.tmp', "utf-8");
+    let setCookies = rawCookies.split(',').map(x => x.split(';')).flat();
+    let cookies = setCookies.filter(x => x.indexOf('ys') > -1 || x.indexOf('yc') > -1).join(';');
+
     let opts = {headers: {
         'Content-Type': 'application/json',
-        'Cookie'      : `compte=${params.b}; ys=${YS}; yc=${YC}`
+        'Cookie'      : `compte=${params.b}; ${cookies}`
     }};
     const response = await fetch(url, opts);
     const body     = await response.text();
@@ -80,3 +101,9 @@ module.exports = {
     readMail  : readMail,
     createMail: createMail
 };
+
+let mail = readMail('http://m.yopmail.com/en/m.php?b=nalleppudedd-4678@yopmail.com&id=me_ZwNjBQVkZwRmAGH5ZQNjAwN4AQH3AN==');
+
+mail.then(response => {
+    console.log(response)
+});

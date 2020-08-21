@@ -1,9 +1,10 @@
 {
   "name": "easy-yopmail",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "generate random mail using http://yopmail.com",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
@@ -13,7 +14,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cheerio": "^1.0.0-rc.3",
-    "node-fetch": "latest"
+    "express": "^4.17.1",
+    "js-packtools": "^2.3.18",
+    "node-fetch": "latest",
+    "node-fetch-cookies": "^1.4.2"
   }
 }
