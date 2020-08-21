@@ -101,9 +101,3 @@ module.exports = {
     readMail  : readMail,
     createMail: createMail
 };
-
-let mail = readMail('http://m.yopmail.com/en/m.php?b=nalleppudedd-4678@yopmail.com&id=me_ZwNjBQVkZwRmAGH5ZQNjAwN4AQH3AN==');
-
-mail.then(response => {
-    console.log(response)
-});
