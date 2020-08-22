@@ -1,18 +1,21 @@
 const YOPmail  = require('./lib');
 let express = require('express');
-let server  = express();
+let app  = express();
 
 const port = process.env.PORT || 3000;
 
+app.get('/', (req, res)=>{
+    res.end('init')
+});
 
-server.get('/api/getmail', function (req, res) {
+app.get('/api/getmail', function (req, res) {
     const petition = YOPmail.createMail();
     petition.then(response => {
         res.send(response);
     })
 });
 
-server.get('/api/getinbox/:mail', function (req, res) {
+app.get('/api/getinbox/:mail', function (req, res) {
     let email = undefined;
     let query = '';
     if((req.params.mail).indexOf('@')>-1){
@@ -33,7 +36,7 @@ server.get('/api/getinbox/:mail', function (req, res) {
     });
 });
 
-server.get('/api/readmail/:mail/:id', function (req, res) {
+app.get('/api/readmail/:mail/:id', function (req, res) {
     let url = 'http://m.yopmail.com/en/m.php?';
     if(req.params.mail && req.params.id){
         url += `b=${req.params.mail}&id=${req.params.id}`
@@ -47,6 +50,6 @@ server.get('/api/readmail/:mail/:id', function (req, res) {
     })
 });
 
-server.listen(port, function () {
+app.listen(port, function () {
     console.log('Example app listening on port:', port);
 });
