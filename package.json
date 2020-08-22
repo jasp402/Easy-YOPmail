@@ -1,6 +1,6 @@
 {
   "name": "easy-yopmail",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "generate random mail using http://yopmail.com",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,5 @@
     "js-packtools": "^2.3.18",
     "node-fetch": "latest",
     "node-fetch-cookies": "^1.4.2"
-  },
+  }
 }
