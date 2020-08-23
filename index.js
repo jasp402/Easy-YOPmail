@@ -48,7 +48,7 @@ const inbox = async (id, phrase, p = 1) => {
     const response = await fetch(`http://m.yopmail.com/en/inbox.php?login=${id}&p=${p}&d=&ctrl=&scrl=&spam=${SPAM}&yf=005&yp=${YP}&yj=${YJ}&v=${V}&r_c=&id=`);
 
     //save or update current cookies
-    jsPackTools.validateDir('./temp');
+    jsPackTools.validateDir(__dirname+'/temp');
     const cookies = response.headers.get('set-cookie');
     fs.writeFileSync('./temp/cookies.tmp', cookies, 'utf-8');
 
