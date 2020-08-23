@@ -36,7 +36,7 @@ const createMail = async () => {
         const $        = cheerio.load(body);
         return await $('#login').val();
     } catch(err) {
-        alert(err); // Failed to fetch
+        console.log(err); // Failed to fetch
     }
 };
 
