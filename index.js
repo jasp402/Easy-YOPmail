@@ -28,9 +28,9 @@ const createMail = async () => {
         const response = await fetch(`http://www.yopmail.com/es/email-generator.php`);
 
         //save current cookies
-        jsPackTools.validateDir(__dirname+'/temp');
+        jsPackTools.validateDir(`${__dirname}/temp`);
         const cookies = response.headers.get('set-cookie');
-        fs.writeFileSync('./temp/cookies.tmp', cookies, 'utf-8');
+        fs.writeFileSync(`${__dirname}/temp/cookies.tmp`, cookies, 'utf-8');
 
         const body     = await response.text();
         const $        = cheerio.load(body);
@@ -48,9 +48,9 @@ const inbox = async (id, phrase, p = 1) => {
     const response = await fetch(`http://m.yopmail.com/en/inbox.php?login=${id}&p=${p}&d=&ctrl=&scrl=&spam=${SPAM}&yf=005&yp=${YP}&yj=${YJ}&v=${V}&r_c=&id=`);
 
     //save or update current cookies
-    jsPackTools.validateDir(__dirname+'/temp');
+    jsPackTools.validateDir(`${__dirname}/temp`);
     const cookies = response.headers.get('set-cookie');
-    fs.writeFileSync('./temp/cookies.tmp', cookies, 'utf-8');
+    fs.writeFileSync(`${__dirname}/temp/cookies.tmp`, cookies, 'utf-8');
 
     const body     = await response.text();
     const $        = cheerio.load(body);
@@ -79,7 +79,7 @@ const inbox = async (id, phrase, p = 1) => {
 /* Read mail by url */
 const readMail = async (url) => {
     let params = searchToObject(url);
-    let rawCookies = fs.readFileSync('./temp/cookies.tmp', "utf-8");
+    let rawCookies = fs.readFileSync(`${__dirname}/temp/cookies.tmp`, "utf-8");
     let setCookies = rawCookies.split(',').map(x => x.split(';')).flat();
     let cookies = setCookies.filter(x => x.indexOf('ys') > -1 || x.indexOf('yc') > -1).join(';');
 
