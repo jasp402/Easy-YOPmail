@@ -28,7 +28,7 @@ const createMail = async () => {
         const response = await fetch(`http://www.yopmail.com/es/email-generator.php`);
 
         //save current cookies
-        jsPackTools.validateDir('./temp');
+        jsPackTools.validateDir(__dirname+'/temp');
         const cookies = response.headers.get('set-cookie');
         fs.writeFileSync('./temp/cookies.tmp', cookies, 'utf-8');
 
