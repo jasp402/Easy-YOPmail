@@ -4,36 +4,61 @@ const assert      = require('assert');
 const fs          = require('fs');
 
 let mailDetail = undefined;
+let firstMail = undefined;
+let secondMail = undefined;
+let rss = undefined;
 
-describe('TEST: Create email', () => {
+describe('🧪 TESTING GENERATE E-MAILS', () => {
 	it('should, generate email dynamically', async () => {
-		let mail = easyYopmail.createMail();
-		assert.ok(mail);
+		firstMail = await easyYopmail.getMail();
+		assert.ok(firstMail);
+		console.log(firstMail);
+	});
+	it('should, generate new email and be differents', async () => {
+		secondMail = await easyYopmail.getMail();
+		assert.notStrictEqual(firstMail, secondMail);
+		console.log(secondMail);
 	});
 });
 
-describe('TEST: get Inbox', () => {
-	it('should, read the inbox and use an email', async () => {
-		let inbox = await easyYopmail.inbox(constants.TEST_MAIL);
-		assert.ok(Array.isArray(inbox));
-		fs.writeFileSync(constants.INBOX_FILE, JSON.stringify(inbox[0]), 'utf-8');
-	}).timeout(30000);
+describe('🧪 TESTING RSS', () => {
+	before(async () => {
+		rss = await easyYopmail.getRSS(constants.TEST_MAIL);
+		console.log(JSON.stringify(rss))
+	});
+	it('should, get RSS url ', () => {
+		assert.ok(rss);
+	});
 });
 
-describe('TEST: Read mail by first inbox', () => {
-	beforeEach(() => {
-		mailDetail = JSON.parse(fs.readFileSync(constants.INBOX_FILE, 'utf-8'));
+describe('🧪 TESTING INBOX', () => {
+	let inbox = undefined;
+	before(async () => {
+		inbox = await easyYopmail.getInbox(constants.TEST_MAIL, {}, {MAX_PAGE:1});
 	});
-	it('should, Get data to inbox and search mail by ID', async () => {
-		let HTML = await easyYopmail.readMail(constants.TEST_MAIL, {id: mailDetail.id});
-		fs.writeFileSync(constants.HTML_ID, HTML, 'utf-8');
-	}).timeout(30000);
-	it('should, Get data to inbox and search mail by Subject', async () => {
-		let HTML = await easyYopmail.readMail(constants.TEST_MAIL, {subject: mailDetail.subject});
-		fs.writeFileSync(constants.HTML_SUBJECT, HTML, 'utf-8');
-	}).timeout(30000);
-	it('should, Get data to inbox and search mail by Content', async () => {
-		let HTML = await easyYopmail.readMail(constants.TEST_MAIL, {content: mailDetail.content});
-		fs.writeFileSync(constants.HTML_CONTENT, HTML, 'utf-8');
-	}).timeout(30000);
+	
+	it('should, inbox has property totalEmail', () => {
+		assert.ok(inbox.hasOwnProperty('totalEmail'));
+	});
+	
+	it('should, inbox has property maxPage', () => {
+		assert.ok(inbox.hasOwnProperty('maxPage'));
+	});
+	
+	it('should, default number page getting is 1', () => {
+		assert.strictEqual(inbox.maxPage, 1);
+	});
+	
+	it('should, inbox has property pages ', () => {
+		assert.ok(inbox.hasOwnProperty('pages'));
+	});
+	
+	it('should, property page is array', () => {
+		assert.ok(Array.isArray(inbox.pages));
+	});
+	
+	it('should, pages to equal 1', () => {
+		assert.strictEqual(inbox.pages.length, 1);
+	});
+	
 });

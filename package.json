@@ -1,22 +1,38 @@
 {
   "name": "easy-yopmail",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Easy-YOPmail (get mail address, inbox and read mail from YOPmail with nodeJS)",
   "main": "app.js",
   "scripts": {
-    "test": "mocha ./tests/test.spec.js"
+    "test": "mocha ./tests/test.spec.js --timeout 300000"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasp402/Easy-YOPmail.git"
+  },
+  "keywords": [
+    "javascript",
+    "tools",
+    "yopmail",
+    "temporal mail",
+    "mails",
+    "email"
+  ],
   "author": {
     "name": "Jesús Antonio Pérez Sandoval",
     "email": "jasp402@gmail.com",
     "url": "http://jasp402.com/"
   },
   "license": "MIT",
-  "dependencies": {
-    "puppeteer": "^10.0.0"
+  "bugs": {
+    "url": "https://github.com/jasp402/easy-yopmail/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jasp402/Easy-YOPmail.git"
+  "homepage": "https://jasp402.gitbook.io/easy-yopmail/",
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "puppeteer": "^10.1.0"
   }
 }
