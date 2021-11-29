@@ -62,4 +62,4 @@ console.log(mail); //YourMail@yopmail.com
 ⚙️ [sendMessage()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/get-rss) <br>
 ⚙️ [deleteMessage()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/get-rss) <br>
 
-> ⚠️ **IMPORTANTE:** Para más detalles visite la documentación completa en: https://app.gitbook.com/@jasp402/s/easy-yopmail/
+> ⚠️ **IMPORTANTE:** Para más detalles visite la documentación completa en: https://jasp402.gitbook.io/easy-yopmail/
