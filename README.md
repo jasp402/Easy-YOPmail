@@ -13,7 +13,7 @@
     </a>
 </p>
 
->[📅 [Registros de cambios](https://jasp402.gitbook.io/easy-yopmail//changelogs): `3.0.2` | 2021.11.28 ]
+>[📅 [Registros de cambios](https://jasp402.gitbook.io/easy-yopmail//changelogs): `3.0.3` | 2021.11.28 ]
 ---
 ## 💌 ¿Qué es Easy-YOPmail?
 Es una librería NPM para nodeJS. Que surge de la necesidad de poder generar correos aleatorios, listar su inbox y leer los correos recibidos, sin necesidad de ingresar de manera manual a ningún sitio web. Utilizando la plataforma de YOPmail y ejecutándose de forma asíncrona. Notablemente útil para scraping, testing y automatizaciones en general.
