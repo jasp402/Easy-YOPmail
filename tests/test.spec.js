@@ -1,6 +1,6 @@
-import * as constants from '../src/constants.js';
-import * as easyYopmail from '../src/index.js';
-import assert from'assert';
+const constants = require('../dist/constants.js');
+const easyYopmail = {getInbox, getMailDetail, deleteMail, deleteInbox} = require('../dist/index.js');
+const assert = require('assert');
 
 let mails = [];
 let inbox = undefined;
