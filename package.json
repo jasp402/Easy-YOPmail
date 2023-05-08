@@ -1,10 +1,11 @@
 {
   "name": "easy-yopmail",
-  "version": "4.0.2",
+  "version": "4.0.4",
   "description": "Easy-YOPmail (get mail address, inbox and read mail from YOPmail with nodeJS)",
-  "main": "app.js",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
+    "build": "babel src --out-dir dist",
     "release": "standard-version",
     "test": "mocha ./tests/test.spec.js --timeout 300000"
   },
@@ -31,6 +32,9 @@
   },
   "homepage": "https://jasp402.gitbook.io/easy-yopmail/",
   "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
     "mocha": "10.1.0",
     "standard-version": "^9.5.0",
     "terser": "^5.17.1"

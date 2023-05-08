@@ -1,5 +1,5 @@
-import * as constants from'../constants.js';
-import * as easyYopmail from'../app.js';
+import * as constants from '../src/constants.js';
+import * as easyYopmail from '../src/index.js';
 import assert from'assert';
 
 let mails = [];
