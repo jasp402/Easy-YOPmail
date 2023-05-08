@@ -1,7 +1,7 @@
 {
-  "name": "easy-yopmail-master",
-  "version": "3.1.1",
-  "description": "Easy-YOPmail (Master)",
+  "name": "easy-yopmail",
+  "version": "3.1.3",
+  "description": "Easy-YOPmail (get mail address, inbox and read mail from YOPmail with nodeJS)",
   "main": "app.js",
   "scripts": {
     "release": "standard-version",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jasp402/easy-yopmail-master.git"
+    "url": "git+https://github.com/jasp402/Easy-YOPmail.git"
   },
   "keywords": [
     "javascript",
@@ -26,7 +26,7 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jasp402/easy-yopmail-master/issues"
+    "url": "https://github.com/jasp402/easy-yopmail/issues"
   },
   "homepage": "https://jasp402.gitbook.io/easy-yopmail/",
   "devDependencies": {
