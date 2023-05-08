@@ -1,7 +1,7 @@
-# 📮 Easy-YOPmail
+# 📮 Easy-YOPmail v4
 <p align="center">
     <a href="#">
-        <img alt="js-packtools" src="https://gblobscdn.gitbook.com/assets%2F-MdF_xK-ItaoR0nZ_8h1%2F-Mjl185Z9hapIlRQqUgI%2F-Mjl1CqRoWAlVb8WqOgg%2FPuppy%20Training%20Tutorial%20YouTube%20Thumbnail%20(1).png" width="546">
+        <img alt="easy-yopmail" src="https://user-images.githubusercontent.com/8978470/236769940-4686c924-6d90-4e81-818a-381c32495800.png" width="546">
     </a>
 </p>
 <p align="center">
@@ -20,7 +20,6 @@ Es una librería NPM para nodeJS. Que surge de la necesidad de poder generar cor
 
 #### Algunas de las principales funciones son:
 - Generar correos electrónicos descartables
-- Obtener RSS
 - Obtener Inbox
 - Leer correos
 - Filtrar contenido dentro de un correo (Beta)
@@ -53,13 +52,12 @@ console.log(mail); //YourMail@yopmail.com
 ⚙️ [getMail()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/mails/get-mail) <br>
 
 **🗃️ Bandeja**<br>
-⚙️ [getRSS()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/get-rss) <br>
 ⚙️ [getInbox()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/get-inbox) <br>
-⚙️ [emptyInbox()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/get-rss) <br>
+⚙️ [emptyInbox()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/delete-inbox) <br>
 
 **📑Mesajes**<br>
-⚙️ [readMessage()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/get-rss) <br>
-⚙️ [sendMessage()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/get-rss) <br>
-⚙️ [deleteMessage()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/get-rss) <br>
+⚙️ [readMessage()](https://jasp402.gitbook.io/easy-yopmail/v/es/methods/messages/read-message-1) <br>
+⚙️ [sendMessage()](https://jasp402.gitbook.io/easy-yopmail/v/es/methods/messages/sendmessage) <br>
+⚙️ [deleteMessage()](https://jasp402.gitbook.io/easy-yopmail/v/es/methods/messages/delete-message) <br>
 
 > ⚠️ **IMPORTANTE:** Para más detalles visite la documentación completa en: https://jasp402.gitbook.io/easy-yopmail/

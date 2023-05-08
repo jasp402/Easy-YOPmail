@@ -1,8 +1,9 @@
 {
   "name": "easy-yopmail",
-  "version": "3.1.5",
+  "version": "4.0.2",
   "description": "Easy-YOPmail (get mail address, inbox and read mail from YOPmail with nodeJS)",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "release": "standard-version",
     "test": "mocha ./tests/test.spec.js --timeout 300000"
@@ -30,12 +31,12 @@
   },
   "homepage": "https://jasp402.gitbook.io/easy-yopmail/",
   "devDependencies": {
-    "mocha": "^6.1.4",
+    "mocha": "10.1.0",
     "standard-version": "^9.5.0",
     "terser": "^5.17.1"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.10",
-    "puppeteer": "^10.1.0"
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.10"
   }
 }

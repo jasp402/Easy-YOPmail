@@ -1,15 +1,14 @@
-const constants   = require('../constants');
-const easyYopmail = require('../app');
-const assert      = require('assert');
-const fs          = require('fs');
+import * as constants from'../constants.js';
+import * as easyYopmail from'../app.js';
+import assert from'assert';
 
 let mails = [];
+let inbox = undefined;
 let mailDetail = undefined;
 let firstMail = undefined;
 let secondMail = undefined;
-let rss = undefined;
 
-describe.only('🧪 TESTING GENERATE E-MAILS', () => {
+describe('🧪 TESTING GENERATE E-MAILS', () => {
 	it('should, generate email dynamically', async () => {
 		mails.push(await easyYopmail.getMail());
 		console.log(mails[0]);
@@ -31,44 +30,54 @@ describe.only('🧪 TESTING GENERATE E-MAILS', () => {
 	});
 });
 
-describe('🧪 TESTING RSS', () => {
+describe('🧪 TESTING INBOX', () => {
+
 	before(async () => {
-		rss = await easyYopmail.getRSS(constants.TEST_MAIL);
-		console.log(JSON.stringify(rss))
+		inbox = await easyYopmail.getInbox(constants.TEST_MAIL);
 	});
-	it('should, get RSS url ', () => {
-		assert.ok(rss);
+
+	it('should, inbox has properties', () => {
+		console.log(inbox);
+		assert.ok(inbox.hasOwnProperty('settings'));
+		assert.ok(inbox.hasOwnProperty('search'));
+		assert.ok(inbox.hasOwnProperty('totalInbox'));
+		assert.ok(inbox.hasOwnProperty('totalPages'));
+		assert.ok(inbox.hasOwnProperty('mailFromPage'));
+		assert.ok(inbox.hasOwnProperty('totalGetMails'));
+		assert.ok(inbox.hasOwnProperty('inbox'));
 	});
+	
+	// it('should, inbox has property maxPage', () => {
+	//
+	// });
+	//
+	// it('should, default number page getting is 1', () => {
+	// 	assert.strictEqual(inbox.maxPage, 1);
+	// });
+	//
+	// it('should, inbox has property pages ', () => {
+	// 	assert.ok(inbox.hasOwnProperty('pages'));
+	// });
+	//
+	// it('should, property page is array', () => {
+	// 	assert.ok(Array.isArray(inbox.pages));
+	// });
+	//
+	// it('should, pages to equal 1', () => {
+	// 	assert.strictEqual(inbox.pages.length, 1);
+	// });
+	
 });
 
-describe('TESTING INBOX', () => {
-	let inbox = undefined;
+describe('🧪 TESTING READ EMAIL', () => {
 	before(async () => {
-		inbox = await easyYopmail.getInbox(constants.TEST_MAIL, {}, {MAX_PAGE:1});
+		inbox = await easyYopmail.getInbox(constants.TEST_MAIL);
 	});
 
-	it('should, inbox has property totalEmail', () => {
-		assert.ok(inbox.hasOwnProperty('totalEmail'));
+	it('should, pages to equal 1', async () => {
+		let id = inbox.inbox[0].id;
+		console.log(id);
+		let email = await easyYopmail.readMessage(constants.TEST_MAIL, id, 'txt');
+		console.log(email);
 	});
-	
-	it('should, inbox has property maxPage', () => {
-		assert.ok(inbox.hasOwnProperty('maxPage'));
-	});
-	
-	it('should, default number page getting is 1', () => {
-		assert.strictEqual(inbox.maxPage, 1);
-	});
-	
-	it('should, inbox has property pages ', () => {
-		assert.ok(inbox.hasOwnProperty('pages'));
-	});
-	
-	it('should, property page is array', () => {
-		assert.ok(Array.isArray(inbox.pages));
-	});
-	
-	it('should, pages to equal 1', () => {
-		assert.strictEqual(inbox.pages.length, 1);
-	});
-	
 });
