@@ -1,14 +1,15 @@
 {
-  "name": "easy-yopmail",
-  "version": "3.0.3",
-  "description": "Easy-YOPmail (get mail address, inbox and read mail from YOPmail with nodeJS)",
+  "name": "easy-yopmail-master",
+  "version": "3.1.1",
+  "description": "Easy-YOPmail (Master)",
   "main": "app.js",
   "scripts": {
+    "release": "standard-version",
     "test": "mocha ./tests/test.spec.js --timeout 300000"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jasp402/Easy-YOPmail.git"
+    "url": "git+https://github.com/jasp402/easy-yopmail-master.git"
   },
   "keywords": [
     "javascript",
@@ -23,13 +24,15 @@
     "email": "jasp402@gmail.com",
     "url": "http://jasp402.com/"
   },
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jasp402/easy-yopmail/issues"
+    "url": "https://github.com/jasp402/easy-yopmail-master/issues"
   },
   "homepage": "https://jasp402.gitbook.io/easy-yopmail/",
   "devDependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "standard-version": "^9.5.0",
+    "terser": "^5.17.1"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
