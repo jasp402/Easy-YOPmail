@@ -1,6 +1,4 @@
-## **Issue Report**
-
-**🐛 Bug report**
+## 🐛 **Issue Report**
 
 **Title:** [Short and descriptive title]
 
@@ -14,33 +12,32 @@
 * Version of NodeJS: 🌐 [e.g., 16.0.0]
 * Version of Easy-yopmail: 📦 [e.g., 3.0.0]
 
+<hr>
+
 **Steps to Reproduce:**
 
 1. ➡️ **[Step 1]**
 2. ➡️ **[Step 2]**
 3. ➡️ **[Step 3]**
 
-**Expected Behavior:**
+<hr>
 
-[What you expected to happen]
+🏳️ **Expected Behavior:**
+> [What you expected to happen]
 
-**Actual Behavior:**
+🚩 **Actual Behavior:**
+> [What actually happened]
 
-[What actually happened]
+📷 **Screenshots / Live demo link:**
+> [If applicable, add screenshots or a live demo link to help explain your problem]
 
-**Screenshots / Live demo link:**
+🧮 **Additional Context:**
+> [Add any other context about the problem here] <br>
+> **💡** I was trying to [what you were trying to do] when I encountered this bug. <br>
+> **🔬** Here are some screenshots that show the problem: <br>
+> [Screenshots]
 
-[If applicable, add screenshots or a live demo link to help explain your problem]
-
-**Additional Context:**
-
-[Add any other context about the problem here]
-
-**💡** I was trying to [what you were trying to do] when I encountered this bug.
-
-**🔬** Here are some screenshots that show the problem:
-
-[Screenshots]
+<hr>
 
 **🤔** I expected [what you expected to happen], but instead [what actually happened].
 
