@@ -105,4 +105,4 @@ easyYOPmail.readMessage('testing_01', 'e_ZwZjAGVlZGHlZQR1ZQNjAwZ5AQp4ZD==', 'TXT
 });
 ```
 
-> ⚠️ **IMPORTANTE:** Para más detalles visite la documentación completa en: https://jasp402.gitbook.io/easy-yopmail/
+> ⚠️ **NOTE:** For more details visit the full documentation at: https://jasp402.gitbook.io/easy-yopmail-v4
