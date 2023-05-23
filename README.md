@@ -1,7 +1,7 @@
-# 📮 Easy-YOPmail v4
+# 📮 Easy-YOPMail v4
 <p align="center">
     <a href="#">
-        <img alt="easy-yopmail" src="https://user-images.githubusercontent.com/8978470/236769940-4686c924-6d90-4e81-818a-381c32495800.png" width="546">
+        <img alt="easy-yopmail" src="https://culqi-images-storage.s3.us-east-2.amazonaws.com/images/v4_EN_us.png" width="auto">
     </a>
 </p>
 <p align="center">
@@ -15,49 +15,101 @@
 
 
 ---
-## 💌 ¿Qué es Easy-YOPmail?
-Es una librería NPM para nodeJS. Que surge de la necesidad de poder generar correos aleatorios, listar su inbox y leer los correos recibidos, sin necesidad de ingresar de manera manual a ningún sitio web. Utilizando la plataforma de YOPmail y ejecutándose de forma asíncrona. Notablemente útil para scraping, testing y automatizaciones en general.
+## 💌 What is Easy-YOPmail?
+a powerful NPM library designed for NodeJS. This tool was born from the need to simplify the generation of random emails, the management of inboxes and the reading of received messages, all without the need to manually interact with any web interface.
 
-#### Algunas de las principales funciones son:
-- Generar correos electrónicos descartables
-- Obtener Inbox
-- Leer correos
-- Filtrar contenido dentro de un correo (Beta)
+Easy-Yopmail is based on the YOPmail platform and operates completely asynchronously. Its intuitive design and efficiency make it an indispensable tool for scraping, automated testing, and any process that requires efficient email management.
+With Easy-Yopmail, you can focus on what really matters: developing your application. Let our bookstore take care of the email for you.
 
-## 📦 Instalación
-Puede instalar la librería mediante [NPM](https://www.npmjs.com/) o [Yarm](https://yarnpkg.com/)
+Join the community of developers who are already taking advantage of Easy-Yopmail. Install it today from NPM and see how it can simplify your workflow!
+
+<hr>
+
+#### The main features of Easy-Yopmail include:
+
+- **Random Email Generation:** Create unique and random email addresses with a single command.
+
+- **Inbox Management:** Access and list the inbox of any Yopmail email address.
+
+- **Reading Emails:** Read received emails without having to interact with any web interface.
+
+- **Asynchronous Operation:** All Easy-Yopmail functions run asynchronously, allowing for a seamless workflow.
+
+- **Easy Integration with NodeJS:** As an NPM library, Easy-Yopmail integrates seamlessly with any NodeJS project.
+
+- **Based on YOPmail**: Easy-Yopmail uses the YOPmail platform, which guarantees the reliability and efficiency of its functions.
+
+## 📦 Install
+You can install the library using [NPM](https://www.npmjs.com/) or [Yarm](https://yarnpkg.com/)
 ```
 npm i easy-yopmail
 ```
 ```
 yarn add easy-yopmail
 ```
-<p align="center">
-    <a href="#">
-        <img alt="js-packtools" src="https://gblobscdn.gitbook.com/assets%2F-MdF_xK-ItaoR0nZ_8h1%2F-Mjl2czgx-9-f6U8DSlG%2F-Mjl6vxELNJWqVH3-fnr%2Feasy-yopmail-install%20(1).gif" width="546">
-    </a>
-</p>
+https://github.com/jasp402/Easy-YOPmail/assets/8978470/775b0b6d-2c83-4bc5-856b-cfb4b58ed247
 
-## 🔧 Modo de uso
+## 🔧 How to use
+
 ``` js
+//Declare module
 const easyYOPmail = require('easy-yopmail');
+```
 
+#### ✉️ *Receive a new email dynamically*
+``` js
 easyYOPmail.getMail().then(mail => {
-console.log(mail); //YourMail@yopmail.com
+    console.log(mail); 
+    //Output:
+    //jemuzivutro-3233@yopmail.com
 });
 ```
 
-## 🧰 Métodos
-**✉️ Correos**<br>
-⚙️ [getMail()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/mails/get-mail) <br>
-
-**🗃️ Bandeja**<br>
-⚙️ [getInbox()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/get-inbox) <br>
-⚙️ [emptyInbox()](https://app.gitbook.com/@jasp402/s/easy-yopmail/methods/inbox/delete-inbox) <br>
-
-**📑Mesajes**<br>
-⚙️ [readMessage()](https://jasp402.gitbook.io/easy-yopmail/v/es/methods/messages/read-message-1) <br>
-⚙️ [sendMessage()](https://jasp402.gitbook.io/easy-yopmail/v/es/methods/messages/sendmessage) <br>
-⚙️ [deleteMessage()](https://jasp402.gitbook.io/easy-yopmail/v/es/methods/messages/delete-message) <br>
+#### 🗃️ *Read inbox of an email*
+``` js
+easyYOPmail.getInbox('testing_01').then(inbox => {
+    console.log(inbox);
+    //Output:
+    //{
+    //  settings: {},
+    //  search: {},
+    //  totalInbox: 271,
+    //  totalPages: 19,
+    //  mailFromPage: { page_1: 15 },
+    //  totalGetMails: 15,
+    //  inbox: [
+    //       {
+    //         id: 'e_ZwZjAGVlZGHlZQR1ZQNjAwZ5AQp4ZD==',
+    //         from: 'Ola no-reply',
+    //         subject: 'this is example message...',
+    //         timestamp: '10:20'
+    //       }
+    //  ]
+    //}
+});
+```
+#### 📑 *Read message*
+``` js
+easyYOPmail.readMessage('testing_01', 'e_ZwZjAGVlZGHlZQR1ZQNjAwZ5AQp4ZD==', 'HTML').then(message => {
+    console.log(message);
+    //Output:
+    //{
+    //  settings: {},
+    //  search: {},
+    //  totalInbox: 271,
+    //  totalPages: 19,
+    //  mailFromPage: { page_1: 15 },
+    //  totalGetMails: 15,
+    //  inbox: [
+    //       {
+    //         id: 'e_ZwZjAGVlZGHlZQR1ZQNjAwZ5AQp4ZD==',
+    //         from: 'Ola no-reply',
+    //         subject: 'this is example message...',
+    //         timestamp: '10:20'
+    //       }
+    //  ]
+    //}
+});
+```
 
 > ⚠️ **IMPORTANTE:** Para más detalles visite la documentación completa en: https://jasp402.gitbook.io/easy-yopmail/

@@ -1,12 +1,12 @@
 {
   "name": "easy-yopmail",
-  "version": "4.0.12",
+  "version": "4.0.14",
   "description": "Easy-YOPmail (get mail address, inbox and read mail from YOPmail with nodeJS)",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir dist",
     "release": "standard-version",
-    "test": "mocha ./tests/test.spec.js --timeout 300000"
+    "test": "mocha src/test.spec.js --timeout 300000"
   },
   "repository": {
     "type": "git",
