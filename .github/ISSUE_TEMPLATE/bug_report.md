@@ -1,23 +1,47 @@
----
-name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: 'bug'
-assignees: ''
+## **Issue Report**
 
----
+**🐛 Bug report**
 
-**🌱 Function Name**
-Type the name of the function where the error was found Ex. `function: customDate`
+**Title:** [Short and descriptive title]
 
-**🐛 The bug**
-A clear and concise description of what the bug is. 
+**About:** Create a report to help us improve
 
-**🤷 Expected behavior**
-A clear and concise description of what you expected to happen.
+**Labels:** bug
 
-**📷 Screenshots / Live demo link (paste the github-readme-stats link as markdown image)**
-If applicable, add screenshots to help explain your problem.
+**Environment:**
 
-**💡 Additional context**
-Add any other context about the problem here.
+* Operating system: 💻 [e.g., Windows 10]
+* Version of NodeJS: 🌐 [e.g., 16.0.0]
+* Version of Easy-yopmail: 📦 [e.g., 3.0.0]
+
+**Steps to Reproduce:**
+
+1. ➡️ **[Step 1]**
+2. ➡️ **[Step 2]**
+3. ➡️ **[Step 3]**
+
+**Expected Behavior:**
+
+[What you expected to happen]
+
+**Actual Behavior:**
+
+[What actually happened]
+
+**Screenshots / Live demo link:**
+
+[If applicable, add screenshots or a live demo link to help explain your problem]
+
+**Additional Context:**
+
+[Add any other context about the problem here]
+
+**💡** I was trying to [what you were trying to do] when I encountered this bug.
+
+**🔬** Here are some screenshots that show the problem:
+
+[Screenshots]
+
+**🤔** I expected [what you expected to happen], but instead [what actually happened].
+
+**💬** Please let me know if you have any questions.
