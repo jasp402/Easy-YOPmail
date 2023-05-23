@@ -1,6 +1,6 @@
 {
   "name": "easy-yopmail",
-  "version": "4.0.15",
+  "version": "4.0.16",
   "description": "Easy-YOPmail (get mail address, inbox and read mail from YOPmail with nodeJS)",
   "main": "dist/index.js",
   "scripts": {
@@ -18,7 +18,9 @@
     "yopmail",
     "temporal mail",
     "mails",
-    "email"
+    "email",
+    "easy-yopmail",
+    "jas402"
   ],
   "author": {
     "name": "Jesús Antonio Pérez Sandoval",
@@ -34,15 +36,9 @@
     "@babel/cli": "^7.21.5",
     "@babel/core": "^7.21.8",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-function-sent": "^7.18.6",
     "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.21.5",
-    "@babel/plugin-transform-runtime": "^7.21.4",
-    "@babel/preset-env": "^7.21.5",
-    "babel-cli": "^6.26.0",
     "babel-plugin-minify-mangle-names": "^0.5.1",
-    "babel-preset-minify": "^0.5.2",
     "mocha": "10.1.0",
     "standard-version": "^9.5.0",
     "terser": "^5.17.1"
