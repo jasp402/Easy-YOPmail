@@ -90,24 +90,17 @@ easyYOPmail.getInbox('testing_01').then(inbox => {
 ```
 #### 📑 *Read message*
 ``` js
-easyYOPmail.readMessage('testing_01', 'e_ZwZjAGVlZGHlZQR1ZQNjAwZ5AQp4ZD==', 'HTML').then(message => {
+easyYOPmail.readMessage('testing_01', 'e_ZwZjAGVlZGHlZQR1ZQNjAwZ5AQp4ZD==', 'TXT').then(message => {
     console.log(message);
     //Output:
     //{
-    //  settings: {},
-    //  search: {},
-    //  totalInbox: 271,
-    //  totalPages: 19,
-    //  mailFromPage: { page_1: 15 },
-    //  totalGetMails: 15,
-    //  inbox: [
-    //       {
-    //         id: 'e_ZwZjAGVlZGHlZQR1ZQNjAwZ5AQp4ZD==',
-    //         from: 'Ola no-reply',
-    //         subject: 'this is example message...',
-    //         timestamp: '10:20'
-    //       }
-    //  ]
+    //  id: 'e_ZwZjAGVlZGHlZQR1ZQNjAwZ5AQp4ZD==',
+    //  submit: 'ITechnoLabs Notification - Event from Hanwha  XNV-6012',
+    //  from: 'ITechnoLabs Notification Service <notifications@mycamcloud.com>',
+    //  date: 'Monday, May 22, 2023 10:23:26 PM',
+    //  selector: '#mail',
+    //  format: 'txt',
+    //  data: 'Hanwha  XNV-6012\n ...'
     //}
 });
 ```
