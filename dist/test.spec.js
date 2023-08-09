@@ -49,11 +49,11 @@ describe('🧪 TESTING INBOX', () => {
 
 	// it('should, inbox has property maxPage', () => {
 	//
-	// });
+	// 	});
 	//
 	// it('should, default number page getting is 1', () => {
 	// 	assert.strictEqual(inbox.maxPage, 1);
-	// });
+	// 	});
 	//
 	// it('should, inbox has property pages ', () => {
 	// 	assert.ok(inbox.hasOwnProperty('pages'));
@@ -61,22 +61,22 @@ describe('🧪 TESTING INBOX', () => {
 	//
 	// it('should, property page is array', () => {
 	// 	assert.ok(Array.isArray(inbox.pages));
-	// });
+	// 	});
 	//
 	// it('should, pages to equal 1', () => {
 	// 	assert.strictEqual(inbox.pages.length, 1);
 	// });
 });
 
-describe('🧪 TESTING READ EMAIL', () => {
-	before(async () => {
-		inbox = await easyYopmail.getInbox(constants.TEST_MAIL);
-	});
-
-	it('should, pages to equal 1', async () => {
-		let id = inbox.inbox[0].id;
-		console.log(id);
-		let email = await easyYopmail.readMessage(constants.TEST_MAIL, id, 'txt');
+describe('🧪 TESTING WRITE EMAIL', () => {
+	it('should, Send email', async () => {
+		let time = new Date().getTime();
+		let mail = 'sender01';
+		let to = 'receiver01';
+		let subject = 'testing_' + time;
+		let body = 'This a test that function writeMessage works! DEMO N°: ' + time;
+		let email = await easyYopmail.writeMessage(mail, to, subject, body);
 		console.log(email);
+		assert.strictEqual(email, 'OK|mobback|Your message has been sent');
 	});
 });
