@@ -21,7 +21,6 @@ describe('🧪 TESTING GENERATE E-MAILS', () => {
 		assert.match(mails[1], /yopmail/g);
 		assert.notStrictEqual(mails[0], mails[1]);
 	});
-
 	it('should, generate new email and be diferent to before', async () => {
 		mails.push((await easyYopmail.getMail()));
 		console.log(mails[2]);
@@ -33,7 +32,7 @@ describe('🧪 TESTING GENERATE E-MAILS', () => {
 describe('🧪 TESTING INBOX', () => {
 
 	before(async () => {
-		inbox = await easyYopmail.getInbox(constants.TEST_MAIL);
+		inbox = await easyYopmail.getInbox('fopreiduzukoi-3476');
 	});
 
 	it('should, inbox has properties', () => {
