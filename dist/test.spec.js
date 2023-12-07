@@ -32,7 +32,7 @@ describe('🧪 TESTING GENERATE E-MAILS', () => {
 describe('🧪 TESTING INBOX', () => {
 
 	before(async () => {
-		inbox = await easyYopmail.getInbox('fopreiduzukoi-3476');
+		inbox = await easyYopmail.getInbox(constants.TEST_MAIL);
 	});
 
 	it('should, inbox has properties', () => {
