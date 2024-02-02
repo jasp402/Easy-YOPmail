@@ -1,8 +1,8 @@
 {
   "name": "easy-yopmail",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Easy-YOPMail (get mail address, inbox and read mail from YOPMail with nodeJS)",
-  "main": "src/index.js",
+  "main": "./src/index.js",
   "scripts": {
     "release": "standard-version",
     "test": "mocha src/test.spec.js --timeout 300000"
