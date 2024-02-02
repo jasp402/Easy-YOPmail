@@ -1,5 +1,5 @@
 const constants = require('./constants.js');
-const easyYopmail = {getInbox, getMailDetail, deleteMail, deleteInbox} = require('./index.js');
+const easyYopmail = require('./index.js');
 const assert = require('assert');
 
 let mails      = [];
@@ -77,6 +77,6 @@ describe('🧪 TESTING WRITE EMAIL', () => {
 		let body = 'This a test that function writeMessage works! DEMO N°: '+time;
 		let email = await  easyYopmail.writeMessage(mail, to, subject, body);
 		console.log(email);
-		assert.strictEqual(email, 'OK|mobback|Your message has been sent');
+		assert.strictEqual(email, 'Your message has been sent');
 	});
 });

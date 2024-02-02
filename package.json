@@ -1,7 +1,7 @@
 {
   "name": "easy-yopmail",
-  "version": "4.1.1",
-  "description": "Easy-YOPmail (get mail address, inbox and read mail from YOPmail with nodeJS)",
+  "version": "4.2.0",
+  "description": "Easy-YOPMail (get mail address, inbox and read mail from YOPMail with nodeJS)",
   "main": "src/index.js",
   "scripts": {
     "release": "standard-version",
@@ -24,7 +24,7 @@
   "author": {
     "name": "Jesús Antonio Pérez Sandoval",
     "email": "jasp402@gmail.com",
-    "url": "http://jasp402.com/"
+    "url": "https://jasp402.com/"
   },
   "license": "ISC",
   "bugs": {
@@ -37,7 +37,6 @@
     "terser": "^5.17.1"
   },
   "dependencies": {
-    "axios": "^1.6.7",
     "cheerio": "^1.0.0-rc.12"
   }
 }
