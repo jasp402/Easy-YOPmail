@@ -6,3 +6,4 @@
 /tests/archives/mailHTML_subject.html
 /tests/archives/mailContent.json
 /.cache/
+/qodana.yaml
