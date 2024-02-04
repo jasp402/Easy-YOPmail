@@ -1,8 +1,15 @@
+---
+name: "\U0001F41BBug report"
+about: Create a report to help us improve
+title: ''
+labels: bug
+assignees: jasp402
+
+---
+
 ## 🐛 **Issue Report**
 
 **Title:** [Short and descriptive title]
-
-**About:** Create a report to help us improve
 
 **Labels:** bug
 

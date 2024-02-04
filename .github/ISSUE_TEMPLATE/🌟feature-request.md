@@ -1,4 +1,11 @@
-## 🌟 Feature Request
+---
+name: "\U0001F31FFeature request"
+about: Suggest an idea for this project
+title: ''
+labels: enhancement
+assignees: jasp402
+
+---
 
 Title: [Concise and descriptive title]
 
