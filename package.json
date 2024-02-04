@@ -1,6 +1,6 @@
 {
   "name": "easy-yopmail",
-  "version": "4.3.1",
+  "version": "4.3.2",
   "description": "Easy-YOPMail (get mail address, inbox and read mail from YOPMail with nodeJS)",
   "main": "index.js",
   "engines": {
@@ -36,9 +36,6 @@
   },
   "homepage": "https://jasp402.gitbook.io/easy-yopmail/",
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.23.9",
-    "@babel/preset-env": "^7.23.9",
-    "babel-preset-minify": "^0.5.2",
     "cheerio": "^1.0.0-rc.12"
   }
 }
