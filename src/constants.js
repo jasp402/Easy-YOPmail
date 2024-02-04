@@ -1,1 +1,133 @@
-const a0_0x2bfbda=a0_0x3bc8;function a0_0x39eb(){const _0x13703a=['6TJnzql','Error\x20getting\x20total\x20number\x20of\x20mails','2296xEeorT','text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7','/wm','readFileSync','inbox.json','mailHTML_content.html','&yj=','none',':S=ALNI_MbohrBpXt1O26O3LDmi-KRsCVPhcw;\x20__eoi=\x22ID=5cd00b43a530b6a4:T=','div.fl\x20>\x20div.md.text.zoom.nw.f24\x20>\x20span.ellipsis:last-child','#mail','now',':S=ALNI_MZ3k3gFQXDYCyC-n7CnlRltSEFoVQ;\x20__gpi=UID=00000a0a4f90dd17:T=','450306XQHDQZ','.yopmail.com','/write?b=','https://yopmail.com/','4913064DZKrnD','cors','es-ES,es;q=0.9',';\x20ywm=','path','ygen','from','subject','Error\x20getting\x20version.\x20Error\x20loading\x20page','Error\x20getting\x20cookies','Mozilla/5.0\x20(Windows\x20NT\x2010.0;\x20Win64;\x20x64)\x20AppleWebKit/537.36\x20(KHTML,\x20like\x20Gecko)\x20Chrome/113.0.0.0\x20Safari/537.36','124910pKJIwj','yopmail.com','Windows','getInbox():\x20Error\x20getting\x20Inbox\x20page','&p=','deleteInbox():\x20Error\x20delete\x20Inbox\x20page','archives','document','/webmail.js','&yp=','getHours','/inbox?login=','#geny','timestamp','https://yopmail.com','Missing\x20parameters','1435oVRdMA','/writepost',':S=AA-Afjb4QKVvFIwSmOYMSnui2gGd\x22;\x20FCNEC=%5B%5B%22AKsRol_M2LZFqBb7LSYXadLKqvJ5hTBhxAex9zsoE4N4YD_W5EKTjaIdnSjUL1onQWaOaUq-2HI8vZCE9bqnfMfFE9XOzzqfKK3c3UA5WvJQYW6YtylSfhXH3FZ4WTR9pzl8dTHsGaiJSwztPBvgXHwUPGcOlsELSQ%3D%3D%22%5D%5D;compte=','floor','https://yopmail.com/ver/','&v=','5479988hYfkHA','mailHTML_subject.html','*/*','keep-alive','gzip,\x20deflate,\x20br','parameters\x20\x27mail\x27\x20is\x20required','\x22Not_A\x20Brand\x22;v=\x2299\x22,\x20\x22Chromium\x22;v=\x22121\x22,\x20\x22Google\x20Chrome\x22;v=\x22121\x22',';\x20compte=','\x22Windows\x22','navigate','test@yopmail.com','No\x20se\x20encontró\x20la\x20función','17848950cYivgx','existsSync','\x22Google\x20Chrome\x22;v=\x22113\x22,\x20\x22Chromium\x22;v=\x22113\x22,\x20\x22Not-A.Brand\x22;v=\x2224\x22','&id=m','\x20_gat=1;','div.fl\x20>\x20div.md.text.zoom.nw.f18\x20>\x20span.ellipsis:last-child','resolve','writeMessage():\x20Error\x20write\x20message','join','utf8','iframe','mailHTML_id.html','ytime=','&id=',':RT=','same-origin','24QMiAMu','&r_c=&id=&ad=0',';\x20__gads=ID=9a0b3cce9ff31bac:T=','1951535HWmLJa','tests','getMinutes','/mail?b=','&p=1&d='];a0_0x39eb=function(){return _0x13703a;};return a0_0x39eb();}(function(_0x4f8000,_0x468b58){const _0x4519a0=a0_0x3bc8,_0xf90b2d=_0x4f8000();while(!![]){try{const _0x466923=parseInt(_0x4519a0(0x150))/0x1*(parseInt(_0x4519a0(0x176))/0x2)+-parseInt(_0x4519a0(0x167))/0x3+-parseInt(_0x4519a0(0x18c))/0x4+-parseInt(_0x4519a0(0x153))/0x5*(parseInt(_0x4519a0(0x158))/0x6)+-parseInt(_0x4519a0(0x186))/0x7*(parseInt(_0x4519a0(0x15a))/0x8)+-parseInt(_0x4519a0(0x16b))/0x9+parseInt(_0x4519a0(0x140))/0xa;if(_0x466923===_0x468b58)break;else _0xf90b2d['push'](_0xf90b2d['shift']());}catch(_0x1ada36){_0xf90b2d['push'](_0xf90b2d['shift']());}}}(a0_0x39eb,0xbbaa6));const path=require(a0_0x2bfbda(0x16f)),fs=require('fs');function timeStampInSeconds(){const _0x37bfc8=a0_0x2bfbda;return Math[_0x37bfc8(0x189)](Date[_0x37bfc8(0x165)]()/0x3e8);}function obtenerYTime(_0x4386ac){const _0x21cbc0=a0_0x2bfbda,_0x4e8f5c=_0x4386ac*0x3e8,_0x21d13b=new Date(_0x4e8f5c),_0x506e1d=_0x21d13b[_0x21cbc0(0x180)](),_0x563c1f=_0x21d13b[_0x21cbc0(0x155)]();return _0x21cbc0(0x14c)+_0x506e1d+':'+_0x563c1f+';';}let location='es',pathLocation=path[a0_0x2bfbda(0x148)](__dirname,'../.cache/location');function a0_0x3bc8(_0x301b18,_0x15cc88){const _0x39eb75=a0_0x39eb();return a0_0x3bc8=function(_0x3bc838,_0x29aac3){_0x3bc838=_0x3bc838-0x137;let _0x2ecf9=_0x39eb75[_0x3bc838];return _0x2ecf9;},a0_0x3bc8(_0x301b18,_0x15cc88);}fs[a0_0x2bfbda(0x141)](pathLocation)&&(location=fs[a0_0x2bfbda(0x15d)](pathLocation,a0_0x2bfbda(0x149)));module['exports']=Object['freeze']({'BASE_URL':a0_0x2bfbda(0x16a),'GENERATOR_URL':a0_0x2bfbda(0x16a)+location+'/email-generator','READ_MAIL_URL':(_0x43904d,_0x404b8a)=>'https://yopmail.com/'+location+a0_0x2bfbda(0x156)+_0x43904d+a0_0x2bfbda(0x143)+_0x404b8a,'WRITE_MAIL_URL':_0x58ff7b=>a0_0x2bfbda(0x16a)+location+a0_0x2bfbda(0x169)+_0x58ff7b+a0_0x2bfbda(0x14d),'DELETE_INBOX_URL':(_0x5e5619,_0x2a2f29,_0x4a045d,_0x48bddf,_0x329147)=>a0_0x2bfbda(0x16a)+location+a0_0x2bfbda(0x181)+_0x5e5619+'&p=1&d=all&ctrl='+_0x2a2f29+a0_0x2bfbda(0x17f)+_0x4a045d+'&yj='+_0x48bddf+a0_0x2bfbda(0x18b)+_0x329147+a0_0x2bfbda(0x151),'DELETE_MESSAGE_URL':(_0x3fb3ae,_0x1dcee0,_0x5963c7,_0x4286de,_0x462e32)=>a0_0x2bfbda(0x16a)+location+a0_0x2bfbda(0x181)+_0x3fb3ae+a0_0x2bfbda(0x157)+_0x1dcee0+'&ctrl=&yp='+_0x5963c7+a0_0x2bfbda(0x160)+_0x4286de+'&v='+_0x462e32+a0_0x2bfbda(0x151),'SEND_MESSAGE_URL':a0_0x2bfbda(0x16a)+location+a0_0x2bfbda(0x187),'INPUT_YP':'input#yp','REGEX_LOCATION':/lang="(.*?)"/,'REGEX_YJ':/&yj=([^&]+)&v=/,'REGEX_TOTAL_MAILS':/w\.finrmail\((.*?)\)/,'INBOX_URL':(_0x5786df,_0x399634,_0x7993f9,_0x4d3aff,_0x37ecff=0x1)=>a0_0x2bfbda(0x16a)+location+a0_0x2bfbda(0x181)+_0x5786df+a0_0x2bfbda(0x17a)+_0x37ecff+'&d=&ctrl=&yp='+_0x399634+'&yj='+_0x7993f9+a0_0x2bfbda(0x18b)+_0x4d3aff+a0_0x2bfbda(0x151),'INBOX_HTTP_CONFIG':(_0x3226a7,_0x409b23)=>({'headers':{'accept':a0_0x2bfbda(0x15b),'cookie':_0x3226a7+a0_0x2bfbda(0x13b)+_0x409b23+';\x20ywm='+_0x409b23+a0_0x2bfbda(0x152)+timeStampInSeconds()+a0_0x2bfbda(0x14e)+timeStampInSeconds()+a0_0x2bfbda(0x166)+timeStampInSeconds()+a0_0x2bfbda(0x14e)+timeStampInSeconds()+':S=ALNI_MbohrBpXt1O26O3LDmi-KRsCVPhcw;\x20__eoi=\x22ID=5cd00b43a530b6a4:T='+timeStampInSeconds()+a0_0x2bfbda(0x14e)+timeStampInSeconds()+a0_0x2bfbda(0x188)+_0x409b23+a0_0x2bfbda(0x16e)+_0x409b23+';\x20'+obtenerYTime(timeStampInSeconds()),'accept-encoding':a0_0x2bfbda(0x138),'accept-language':a0_0x2bfbda(0x16d),'connection':a0_0x2bfbda(0x137),'host':'yopmail.com','referer':a0_0x2bfbda(0x16a)+location+a0_0x2bfbda(0x15c),'sec-ch-ua':a0_0x2bfbda(0x13a),'sec-ch-ua-mobile':'?0','sec-ch-ua-platform':a0_0x2bfbda(0x178),'sec-fetch-dest':a0_0x2bfbda(0x14a),'sec-fetch-mode':'navigate','sec-fetch-site':a0_0x2bfbda(0x14f),'sec-fetch-user':'?1','upgrade-insecure-requests':'1','user-agent':'Mozilla/5.0\x20(Windows\x20NT\x2010.0;\x20Win64;\x20x64)\x20AppleWebKit/537.36\x20(KHTML,\x20like\x20Gecko)\x20Chrome/112.0.0.0\x20Safari/537.36'}}),'WRITE_MESSAGE_HTTP_CONFIG':(_0x5c45bd,_0x13bbf7)=>({'headers':{'accept':a0_0x2bfbda(0x18e),'accept-encoding':a0_0x2bfbda(0x138),'accept-language':a0_0x2bfbda(0x16d),'connection':a0_0x2bfbda(0x137),'content-type':'application/x-www-form-urlencoded','cookie':_0x5c45bd+a0_0x2bfbda(0x13b)+_0x13bbf7+a0_0x2bfbda(0x16e)+_0x13bbf7+';\x20__gads=ID=9a0b3cce9ff31bac:T='+timeStampInSeconds()+a0_0x2bfbda(0x14e)+timeStampInSeconds()+a0_0x2bfbda(0x166)+timeStampInSeconds()+a0_0x2bfbda(0x14e)+timeStampInSeconds()+a0_0x2bfbda(0x162)+timeStampInSeconds()+a0_0x2bfbda(0x14e)+timeStampInSeconds()+a0_0x2bfbda(0x188)+_0x13bbf7+a0_0x2bfbda(0x16e)+_0x13bbf7+';\x20'+obtenerYTime(timeStampInSeconds()),'host':'yopmail.com','origin':a0_0x2bfbda(0x184),'referer':a0_0x2bfbda(0x16a)+location+'/wm','sec-ch-ua':a0_0x2bfbda(0x142),'sec-ch-ua-mobile':'?0','sec-ch-ua-platform':'Windows','sec-fetch-dest':'empty','sec-fetch-mode':a0_0x2bfbda(0x16c),'sec-fetch-site':'same-origin','user-agent':a0_0x2bfbda(0x175)}}),'RSS_HTTP_CONFIG':(_0x53fee0,_0x386d5a)=>({'accept':a0_0x2bfbda(0x15b),'cookie':_0x53fee0+';\x20_ga=GA1.2.503151223.1683393694;\x20_gid=GA1.2.1659462416.1683393694;\x20__gads=ID=1aef015d5c605919-2289ab29f27f0062:T=1683393694:RT=1683393694:S=ALNI_MYhXB3g-Ape8Bl2op45lGwvANkLFg;\x20__gpi=UID=000009f291461986:T=1683393694:RT='+timeStampInSeconds()+':S=ALNI_MZM6T_Gt5i9mVk7fSPYTS_lNnT05A;\x20compte='+_0x386d5a+';\x20ywm='+_0x386d5a+';\x20'+obtenerYTime(timeStampInSeconds())+a0_0x2bfbda(0x144),'accept-encoding':a0_0x2bfbda(0x138),'accept-language':a0_0x2bfbda(0x16d),'connection':a0_0x2bfbda(0x137),'host':a0_0x2bfbda(0x177),'referer':'https://yopmail.com/'+location+a0_0x2bfbda(0x15c),'sec-ch-ua':a0_0x2bfbda(0x142),'sec-ch-ua-mobile':'?0','sec-ch-ua-platform':a0_0x2bfbda(0x13c),'sec-fetch-dest':a0_0x2bfbda(0x17d),'sec-fetch-mode':a0_0x2bfbda(0x13d),'sec-fetch-site':a0_0x2bfbda(0x161),'sec-fetch-user':'?1','upgrade-insecure-requests':'1','user-agent':a0_0x2bfbda(0x175)}),'WEBMAIL_JS_URL':_0x235a3c=>a0_0x2bfbda(0x18a)+_0x235a3c+a0_0x2bfbda(0x17e),'ERROR_MAIL_INVALID':a0_0x2bfbda(0x139),'ERROR_SEARCH_INVALID':'parameters\x20\x27_search\x27\x20keys\x20is\x20invalid,\x20try\x20again\x20with\x20(subject\x20ot\x20content)','ERROR_LOAD_PAGE':'getMail():\x20Error\x20getting\x20YOPMail\x20page','ERROR_GET_INBOX':a0_0x2bfbda(0x179),'ERROR_DELETE_INBOX':a0_0x2bfbda(0x17b),'ERROR_READ_MESSAGE':'readMessage():\x20Error\x20read\x20message','ERROR_WRITE_MESSAGE':a0_0x2bfbda(0x147),'ERROR_DELETE_MESSAGE':'deleteMessage():\x20Error\x20delete\x20message','ERROR_PARAMETERS_INVALID':a0_0x2bfbda(0x13f),'ERROR_GET_COOKIES':a0_0x2bfbda(0x174),'ERROR_GET_VERSION':a0_0x2bfbda(0x173),'ERROR_MISSING_PARAMETERS':a0_0x2bfbda(0x185),'ERROR_GET_TOTAL_MAILS':a0_0x2bfbda(0x159),'ERROR_GET_YJ':'Error\x20getting\x20YJ','COOKIE':_0x43a941=>{const _0x4f858e=a0_0x2bfbda;return{'name':_0x4f858e(0x170),'value':_0x43a941,'domain':_0x4f858e(0x168),'url':_0x4f858e(0x16a),'path':'/','httpOnly':![],'secure':![]};},'TEST_MAIL':a0_0x2bfbda(0x13e),'INBOX_FILE':path[a0_0x2bfbda(0x146)](a0_0x2bfbda(0x154),a0_0x2bfbda(0x17c),a0_0x2bfbda(0x15e)),'MAIL_CONTENT':path[a0_0x2bfbda(0x146)](a0_0x2bfbda(0x154),'archives','mailContent.json'),'HTML_ID':path[a0_0x2bfbda(0x146)](a0_0x2bfbda(0x154),a0_0x2bfbda(0x17c),a0_0x2bfbda(0x14b)),'HTML_SUBJECT':path[a0_0x2bfbda(0x146)](a0_0x2bfbda(0x154),a0_0x2bfbda(0x17c),a0_0x2bfbda(0x18d)),'HTML_CONTENT':path[a0_0x2bfbda(0x146)](a0_0x2bfbda(0x154),a0_0x2bfbda(0x17c),a0_0x2bfbda(0x15f)),'S_INPUT_MAIL_GENERATE':a0_0x2bfbda(0x182),'SELECTOR_SUBMIT':'div.fl\x20>\x20div.ellipsis.nw.b.f18','SELECTOR_FROM':'div.fl\x20>\x20div.md.text.zoom.nw.f24\x20>\x20span.ellipsis.b','SELECTOR_DATE':a0_0x2bfbda(0x163),'SELECTOR_FROM_ALT':'div.fl\x20>\x20div.md.text.zoom.nw.f18\x20>\x20span.ellipsis.b','SELECTOR_DATE_ALT':a0_0x2bfbda(0x145),'SELECTOR_MAIL':a0_0x2bfbda(0x164),'possibleKeys':['id',a0_0x2bfbda(0x171),a0_0x2bfbda(0x172),a0_0x2bfbda(0x183)]});
+const path = require('path');
+const fs   = require('fs');
+
+function timeStampInSeconds() {
+    return Math.floor(Date.now() / 1000);
+}
+
+function obtenerYTime(timestampEnSegundos) {
+    const timestampEnMilisegundos = timestampEnSegundos * 1000;
+    const fecha                   = new Date(timestampEnMilisegundos);
+    const hora                    = fecha.getHours();
+    const minutos                 = fecha.getMinutes();
+    return `ytime=${hora}:${minutos};`;
+}
+
+let location     = 'es';
+let pathLocation = path.join(__dirname, '../.cache/location');
+if (fs.existsSync(pathLocation)) {
+    location = fs.readFileSync(pathLocation, 'utf8');
+}
+
+module.exports = Object.freeze({
+    BASE_URL                 : `https://yopmail.com/`,
+    GENERATOR_URL            : `https://yopmail.com/${location}/email-generator`,
+    READ_MAIL_URL            : (mail, id) => `https://yopmail.com/${location}/mail?b=${mail}&id=m${id}`,
+    WRITE_MAIL_URL           : (mail) => `https://yopmail.com/${location}/write?b=${mail}&id=`,
+    DELETE_INBOX_URL         : (mail, id, yp, yj, ver) => `https://yopmail.com/${location}/inbox?login=${mail}&p=1&d=all&ctrl=${id}&yp=${yp}&yj=${yj}&v=${ver}&r_c=&id=&ad=0`,
+    DELETE_MESSAGE_URL       : (mail, id, yp, yj, ver) => `https://yopmail.com/${location}/inbox?login=${mail}&p=1&d=${id}&ctrl=&yp=${yp}&yj=${yj}&v=${ver}&r_c=&id=&ad=0`,
+    SEND_MESSAGE_URL         : `https://yopmail.com/${location}/writepost`,
+    INPUT_YP                 : 'input#yp',
+    REGEX_LOCATION           : /lang="(.*?)"/,
+    REGEX_YJ                 : /&yj=([^&]+)&v=/,
+    REGEX_TOTAL_MAILS        : /w\.finrmail\((.*?)\)/,
+    INBOX_URL                : (mail, yp, yj, ver, page = 1) => `https://yopmail.com/${location}/inbox?login=${mail}&p=${page}&d=&ctrl=&yp=${yp}&yj=${yj}&v=${ver}&r_c=&id=&ad=0`,
+    INBOX_HTTP_CONFIG        : (cookie, mail) => ({
+        headers: {
+            'accept'                   : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'cookie'                   : `${cookie}; compte=${mail}; ywm=${mail}; __gads=ID=9a0b3cce9ff31bac:T=${timeStampInSeconds()}:RT=${timeStampInSeconds()}:S=ALNI_MZ3k3gFQXDYCyC-n7CnlRltSEFoVQ; __gpi=UID=00000a0a4f90dd17:T=${timeStampInSeconds()}:RT=${timeStampInSeconds()}:S=ALNI_MbohrBpXt1O26O3LDmi-KRsCVPhcw; __eoi="ID=5cd00b43a530b6a4:T=${(timeStampInSeconds())}:RT=${(timeStampInSeconds())}:S=AA-Afjb4QKVvFIwSmOYMSnui2gGd"; FCNEC=%5B%5B%22AKsRol_M2LZFqBb7LSYXadLKqvJ5hTBhxAex9zsoE4N4YD_W5EKTjaIdnSjUL1onQWaOaUq-2HI8vZCE9bqnfMfFE9XOzzqfKK3c3UA5WvJQYW6YtylSfhXH3FZ4WTR9pzl8dTHsGaiJSwztPBvgXHwUPGcOlsELSQ%3D%3D%22%5D%5D;compte=${mail}; ywm=${mail}; ${obtenerYTime(timeStampInSeconds())}`,
+            'accept-encoding'          : 'gzip, deflate, br',
+            'accept-language'          : 'es-ES,es;q=0.9',
+            'connection'               : 'keep-alive',
+            'host'                     : 'yopmail.com',
+            'referer'                  : `https://yopmail.com/${location}/wm`,
+            'sec-ch-ua'                : '"Not_A Brand";v="99", "Chromium";v="121", "Google Chrome";v="121"',
+            'sec-ch-ua-mobile'         : '?0',
+            'sec-ch-ua-platform'       : 'Windows',
+            'sec-fetch-dest'           : 'iframe',
+            'sec-fetch-mode'           : 'navigate',
+            'sec-fetch-site'           : 'same-origin',
+            'sec-fetch-user'           : '?1',
+            'upgrade-insecure-requests': '1',
+            'user-agent'               : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36'
+        }
+    }),
+    WRITE_MESSAGE_HTTP_CONFIG: (cookie, mail) => ({
+        headers: {
+            'accept'            : '*/*',
+            'accept-encoding'   : 'gzip, deflate, br',
+            'accept-language'   : 'es-ES,es;q=0.9',
+            'connection'        : 'keep-alive',
+            'content-type'      : 'application/x-www-form-urlencoded',
+            'cookie'            : `${cookie}; compte=${mail}; ywm=${mail}; __gads=ID=9a0b3cce9ff31bac:T=${timeStampInSeconds()}:RT=${timeStampInSeconds()}:S=ALNI_MZ3k3gFQXDYCyC-n7CnlRltSEFoVQ; __gpi=UID=00000a0a4f90dd17:T=${timeStampInSeconds()}:RT=${timeStampInSeconds()}:S=ALNI_MbohrBpXt1O26O3LDmi-KRsCVPhcw; __eoi="ID=5cd00b43a530b6a4:T=${(timeStampInSeconds())}:RT=${(timeStampInSeconds())}:S=AA-Afjb4QKVvFIwSmOYMSnui2gGd"; FCNEC=%5B%5B%22AKsRol_M2LZFqBb7LSYXadLKqvJ5hTBhxAex9zsoE4N4YD_W5EKTjaIdnSjUL1onQWaOaUq-2HI8vZCE9bqnfMfFE9XOzzqfKK3c3UA5WvJQYW6YtylSfhXH3FZ4WTR9pzl8dTHsGaiJSwztPBvgXHwUPGcOlsELSQ%3D%3D%22%5D%5D;compte=${mail}; ywm=${mail}; ${obtenerYTime(timeStampInSeconds())}`,
+            'host'              : 'yopmail.com',
+            'origin'            : 'https://yopmail.com',
+            'referer'           : `https://yopmail.com/${location}/wm`,
+            'sec-ch-ua'         : '"Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
+            'sec-ch-ua-mobile'  : '?0',
+            'sec-ch-ua-platform': 'Windows',
+            'sec-fetch-dest'    : 'empty',
+            'sec-fetch-mode'    : 'cors',
+            'sec-fetch-site'    : 'same-origin',
+            'user-agent'        : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36'
+        }
+    }),
+    RSS_HTTP_CONFIG          : (cookie, mail) => ({
+        'accept'                   : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'cookie'                   : `${cookie}; _ga=GA1.2.503151223.1683393694; _gid=GA1.2.1659462416.1683393694; __gads=ID=1aef015d5c605919-2289ab29f27f0062:T=1683393694:RT=1683393694:S=ALNI_MYhXB3g-Ape8Bl2op45lGwvANkLFg; __gpi=UID=000009f291461986:T=1683393694:RT=${(timeStampInSeconds())}:S=ALNI_MZM6T_Gt5i9mVk7fSPYTS_lNnT05A; compte=${mail}; ywm=${mail}; ${obtenerYTime(timeStampInSeconds())} _gat=1;`,
+        'accept-encoding'          : 'gzip, deflate, br',
+        'accept-language'          : 'es-ES,es;q=0.9',
+        'connection'               : 'keep-alive',
+        'host'                     : 'yopmail.com',
+        'referer'                  : `https://yopmail.com/${location}/wm`,
+        'sec-ch-ua'                : '"Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
+        'sec-ch-ua-mobile'         : '?0',
+        'sec-ch-ua-platform'       : '"Windows"',
+        'sec-fetch-dest'           : 'document',
+        'sec-fetch-mode'           : 'navigate',
+        'sec-fetch-site'           : 'none',
+        'sec-fetch-user'           : '?1',
+        'upgrade-insecure-requests': '1',
+        'user-agent'               : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36'
+    }),
+    WEBMAIL_JS_URL           : (ver) => `https://yopmail.com/ver/${ver}/webmail.js`,
+    ERROR_MAIL_INVALID       : 'parameters \'mail\' is required',
+    ERROR_SEARCH_INVALID     : 'parameters \'_search\' keys is invalid, try again with (subject ot content)',
+    ERROR_LOAD_PAGE          : 'getMail(): Error getting YOPMail page',
+    ERROR_GET_INBOX          : 'getInbox(): Error getting Inbox page',
+    ERROR_DELETE_INBOX       : 'deleteInbox(): Error delete Inbox page',
+    ERROR_READ_MESSAGE       : 'readMessage(): Error read message',
+    ERROR_WRITE_MESSAGE      : 'writeMessage(): Error write message',
+    ERROR_DELETE_MESSAGE     : 'deleteMessage(): Error delete message',
+    ERROR_PARAMETERS_INVALID : 'No se encontró la función',
+    ERROR_GET_COOKIES        : 'Error getting cookies',
+    ERROR_GET_VERSION        : 'Error getting version. Error loading page',
+    ERROR_MISSING_PARAMETERS : 'Missing parameters',
+    ERROR_GET_TOTAL_MAILS    : 'Error getting total number of mails',
+    ERROR_GET_YJ             : 'Error getting YJ',
+    COOKIE                   : mail => {
+        return {
+            name    : 'ygen',
+            value   : mail,
+            domain  : '.yopmail.com',
+            url     : 'https://yopmail.com/',
+            path    : '/',
+            httpOnly: false,
+            secure  : false
+        }
+    },
+    TEST_MAIL                : 'test@yopmail.com',
+    INBOX_FILE               : path.resolve('tests', 'archives', 'inbox.json'),
+    MAIL_CONTENT             : path.resolve('tests', 'archives', 'mailContent.json'),
+    HTML_ID                  : path.resolve('tests', 'archives', 'mailHTML_id.html'),
+    HTML_SUBJECT             : path.resolve('tests', 'archives', 'mailHTML_subject.html'),
+    HTML_CONTENT             : path.resolve('tests', 'archives', 'mailHTML_content.html'),
+    S_INPUT_MAIL_GENERATE    : '#geny',
+    SELECTOR_SUBMIT          : 'div.fl > div.ellipsis.nw.b.f18',
+    SELECTOR_FROM            : 'div.fl > div.md.text.zoom.nw.f24 > span.ellipsis.b',
+    SELECTOR_DATE            : 'div.fl > div.md.text.zoom.nw.f24 > span.ellipsis:last-child',
+    SELECTOR_FROM_ALT        : 'div.fl > div.md.text.zoom.nw.f18 > span.ellipsis.b',
+    SELECTOR_DATE_ALT        : 'div.fl > div.md.text.zoom.nw.f18 > span.ellipsis:last-child',
+    SELECTOR_MAIL            : '#mail',
+    possibleKeys             : ['id', 'from', 'subject', 'timestamp'],
+});
