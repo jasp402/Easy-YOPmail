@@ -71,6 +71,6 @@ describe('🧪 TESTING WRITE EMAIL', () => {
         let subject = 'testing_' + time;
         let body    = 'This a test that function writeMessage works! DEMO N°: ' + time;
         let email   = await easyYopmail.writeMessage(mail, to, subject, body);
-        assert.strictEqual(email, 'Tu mensaje ha sido enviado');
+        assert.strictEqual(email, 'Your message has been sent');
     });
 });
