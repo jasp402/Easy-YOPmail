@@ -1,12 +1,14 @@
 {
   "name": "easy-yopmail",
-  "version": "4.0.17",
-  "description": "Easy-YOPmail (get mail address, inbox and read mail from YOPmail with nodeJS)",
-  "main": "dist/index.js",
+  "version": "4.2.14",
+  "description": "Easy-YOPMail (get mail address, inbox and read mail from YOPMail with nodeJS)",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-    "build": "babel src --out-dir dist",
     "release": "standard-version",
-    "test": "mocha src/test.spec.js --timeout 300000"
+    "test": "node src/test.spec.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,7 @@
   "author": {
     "name": "Jesús Antonio Pérez Sandoval",
     "email": "jasp402@gmail.com",
-    "url": "http://jasp402.com/"
+    "url": "https://jasp402.com/"
   },
   "license": "ISC",
   "bugs": {
@@ -33,18 +35,9 @@
   },
   "homepage": "https://jasp402.gitbook.io/easy-yopmail/",
   "devDependencies": {
-    "@babel/cli": "^7.21.5",
-    "@babel/core": "^7.21.8",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "babel-plugin-minify-mangle-names": "^0.5.1",
-    "mocha": "10.1.0",
-    "standard-version": "^9.5.0",
     "terser": "^5.17.1"
   },
   "dependencies": {
-    "axios": "^1.4.0",
-    "cheerio": "^1.0.0-rc.10"
+    "cheerio": "^1.0.0-rc.12"
   }
 }
