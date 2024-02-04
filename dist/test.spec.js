@@ -1,5 +1,5 @@
 const constants = require('./constants.js');
-const easyYopmail = ({ getInbox, getMailDetail, deleteMail, deleteInbox } = require('./index.js'));
+const easyYopmail = ({ getInbox, getMailDetail, deleteMail, deleteInbox } = require('../index.js'));
 const assert = require('assert');
 
 let mails = [];
