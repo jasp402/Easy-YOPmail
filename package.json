@@ -1,6 +1,6 @@
 {
   "name": "easy-yopmail",
-  "version": "4.2.14",
+  "version": "4.2.17",
   "description": "Easy-YOPMail (get mail address, inbox and read mail from YOPMail with nodeJS)",
   "main": "index.js",
   "engines": {
