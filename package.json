@@ -7,7 +7,6 @@
     "node": ">=18"
   },
   "scripts": {
-    "release": "standard-version",
     "test": "node src/test.spec.js"
   },
   "repository": {
@@ -34,9 +33,6 @@
     "url": "https://github.com/jasp402/easy-yopmail/issues"
   },
   "homepage": "https://jasp402.gitbook.io/easy-yopmail/",
-  "devDependencies": {
-    "terser": "^5.17.1"
-  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12"
   }
