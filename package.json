@@ -8,8 +8,9 @@
   },
   "scripts": {
     "build": "babel src --out-dir dist && babel index.js --out-file dist/index.js",
-    "test": "node src/test.spec.js",
-    "release": "release-it"
+    "release": "release-it",
+    "test": "node tests/e2eTest.spec.js",
+    "unit.test": "node tests/unitTest.spec.js"
   },
   "repository": {
     "type": "git",
