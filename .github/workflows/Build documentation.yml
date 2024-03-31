@@ -1,4 +1,4 @@
-name: 🌐 Build documentation
+name: Build documentation - old
 
 on:
   push:
