@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <sitemap priority="0.35" change-frequency="monthly"/>
 
-    <variables></variables>
+    <variables>
+        <custom-favicons>favico-48.ico</custom-favicons>
+        <header-logo>logo.png</header-logo>
+        <download-title>NPM Documentation</download-title>
+        <download-page>https://www.npmjs.com/package/easy-yopmail</download-page>
+        <showDownloadButton>true</showDownloadButton>
+        <primary-color>dracula</primary-color>
+    </variables>
     <build-profile instance="e">
+
         <variables>
-            <noindex-content>true</noindex-content>
-            <offline-docs>false</offline-docs>
+            <noindex-content>false</noindex-content>
+            <offline-docs>true</offline-docs>
         </variables>
     </build-profile>
+    <footer>
+        <copyright>Jasp402 | 2020-2024</copyright>
+
+        <social type="blog" href="link to a blog"></social>
+        <social type="twitter" href="link to a Twitter account"></social>
+        <social type="youtube" href="link to a Twitter account"></social>
+        <social type="linkedin" href="link to a Facebook account"></social>
+        <social type="email" href="link to a Facebook account"></social>
+
+        <link href="https://slack.example.com">Slack community</link>
+        <link href="https://stackoverflow.com">StackOverflow</link>
+        <link href="https://example.com/terms-an-conditions.html">Terms and conditions</link>
+        <link href="https://example.com/code-of-conduct.html">Code of Conduct</link>
+    </footer>
 
 </buildprofiles>

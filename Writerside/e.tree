@@ -5,6 +5,23 @@
 <instance-profile id="e"
                  name="EasyYopmail"
                  start-page="starter-topic.md">
-
     <toc-element topic="starter-topic.md"/>
+    <toc-element toc-title="Emails">
+        <toc-element topic="getMail.md"/>
+    </toc-element>
+    <toc-element toc-title="Inbox">
+        <toc-element topic="getInbox.md"/>
+        <toc-element topic="deleteInbox.md"/>
+    </toc-element>
+    <toc-element toc-title="Message">
+        <toc-element topic="readMessage.md"/>
+        <toc-element topic="writeMessage.md"/>
+        <toc-element topic="deleteMessage.md"/>
+    </toc-element>
+    <toc-element topic="Improvements.md"/>
+    <toc-element toc-title="Latest News">
+        <toc-element topic="Announcements.md"/>
+        <toc-element topic="Blog.md"/>
+    </toc-element>
+    <toc-element topic="Sponsors.md"/>
 </instance-profile>

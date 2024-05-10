@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE terms SYSTEM "https://resources.jetbrains.com/writerside/1.0/glossary.dtd">
+<terms>
+    <term name="GUI">Graphical User Interface</term>
+    <term name="tooltip">Tooltips show a definition when a user hovers over a term.</term>
+    <term name="runkit">This is a playground to test code. It runs a full Node.js environment and already has all of npm’s 1,000,000+ packages pre-installed, including easy-yopmail.</term>
+</terms>

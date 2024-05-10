@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rules SYSTEM "https://resources.jetbrains.com/writerside/1.0/redirection-rules.dtd">
+<rules>
+    <!-- format is as follows
+    <rule id="<unique id>">
+        <accepts>page.html</accepts>
+    </rule>
+    -->
+    <rule id="7b67b394">
+        <description>Created after removal of "Empty XML Topic" from EasyYopmail</description>
+        <accepts>Empty-XML-Topic.html</accepts>
+    </rule>
+    <rule id="21c5a74f">
+        <description>Created after removal of "Section Starting Page" from EasyYopmail</description>
+        <accepts>Section-Starting-Page.html</accepts>
+    </rule>
+</rules>
