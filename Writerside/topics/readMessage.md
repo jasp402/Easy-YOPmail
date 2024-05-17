@@ -1,32 +1,42 @@
 # 📑 readMessage()
 
-# Definición
-The readMessage() function in Easy-Yopmail allows you to read the content of a specific email within a YOPmail inbox. It provides options to retrieve the content in plain text or HTML format, and even allows you to target specific elements within the email using CSS selectors.
-Parámetros de entrada
-Parámetro	Tipo	Descripción
-mail	String	La dirección de correo electrónico YOPmail (sin el dominio @yopmail.com).
-id	String	El ID único del correo electrónico que desea leer.
-options	Object	(Opcional) Un objeto con opciones adicionales para personalizar la lectura.
-Opciones dentro del parámetro options:
-format: (Opcional) Formato del contenido del correo electrónico. Puede ser "TXT" (texto plano) o "HTML" (HTML). Por defecto es "TXT".
-selector: (Opcional) Un selector CSS para apuntar a un elemento específico dentro del cuerpo del correo electrónico HTML.
-attribute: (Opcional) Si se proporciona un selector, este parámetro especifica el atributo del elemento que se va a devolver (por ejemplo, "href" para un enlace).
-pathToSave: (Opcional) Ruta para guardar el HTML del correo electrónico como un archivo.
-Salida
-La función readMessage() devuelve una promesa que se resuelve con un objeto que contiene la siguiente información:
-id: El ID del correo electrónico.
-submit: El asunto del correo electrónico.
-from: La dirección de correo electrónico del remitente.
-date: La fecha en que se recibió el correo electrónico.
-deliverability: Información sobre la entrega del correo electrónico.
-format: El formato del contenido devuelto ("TXT" o "HTML").
-selector: El selector CSS utilizado (si se proporciona).
-eq: El índice del elemento seleccionado (si se proporciona).
-attribute: El atributo del elemento seleccionado (si se proporciona).
-pathToSave: La ruta donde se guardó el HTML (si se proporciona).
-content: El contenido del correo electrónico en el formato especificado.
-info: Una lista de advertencias o mensajes informativos.
-Diagrama mermaid
+The `readMessage()` function in Easy-Yopmail allows you to read the content of a specific email within a YOPmail inbox. It provides options to retrieve the content in plain text or HTML format, and even allows you to target specific elements within the email using CSS selectors.
+
+## Input Parameters
+
+| Parameter | Type | Description |
+|---|---|---|
+| `mail` | String | The YOPmail email address (without the @yopmail.com domain). |
+| `id` | String | The unique ID of the email you want to read. |
+| `options` | Object | (Optional) An object with additional options to customize the read operation. |
+
+### Options within the `options` parameter:
+
+- **`format`**: (Optional) Format of the email content. Can be "TXT" (plain text) or "HTML" (HTML). Defaults to "TXT".
+- **`selector`**: (Optional) A CSS selector to target a specific element within the HTML email body.
+- **`attribute`**: (Optional) If a selector is provided, this parameter specifies the attribute of the element to be returned (e.g., "href" for a link).
+- **`pathToSave`**: (Optional) Path to save the email HTML as a file.
+
+## Output
+
+The `readMessage()` function returns a promise that resolves with an object containing the following information:
+
+- **`id`**: The ID of the email.
+- **`submit`**: The subject of the email.
+- **`from`**: The sender's email address.
+- **`date`**: The date the email was received.
+- **`deliverability`**: Information about the email delivery.
+- **`format`**: The format of the returned content ("TXT" or "HTML").
+- **`selector`**: The CSS selector used (if provided).
+- **`eq`**: The index of the selected element (if provided).
+- **`attribute`**: The attribute of the selected element (if provided).
+- **`pathToSave`**: The path where the HTML was saved (if provided).
+- **`content`**: The content of the email in the specified format.
+- **`info`**: A list of warnings or informational messages.
+
+## Mermaid Diagram
+
+```mermaid
 sequenceDiagram
 participant NodeJS
 participant EasyYopmail
@@ -43,40 +53,49 @@ activate EasyYopmail
 EasyYopmail->>FileSystem: Save HTML content
 deactivate EasyYopmail
 end
-Use code with caution.
-Mermaid
-Casos de uso prácticos
-Leer el contenido de texto plano de un correo electrónico:
-easyYopmail.readMessage('mi-correo', 'id-del-correo')
+```
+
+## Practical Use Cases
+
+### 1. Read Plain Text Content of an Email
+
+```javascript
+easyYopmail.readMessage('my-email', 'email-id')
 .then(message => {
-console.log(message.content); // Contenido del correo en texto plano
+    console.log(message.content); // Plain text content of the email
 });
-Use code with caution.
-JavaScript
-Extraer un enlace de confirmación de un correo electrónico HTML:
-easyYopmail.readMessage('mi-correo', 'id-del-correo', { format: 'HTML', selector: 'a.confirmation-link', attribute: 'href' })
+```
+
+### 2. Extract Confirmation Link from HTML Email
+
+```javascript
+easyYopmail.readMessage('my-email', 'email-id', { format: 'HTML', selector: 'a.confirmation-link', attribute: 'href' })
 .then(message => {
-console.log(message.content); // URL del enlace de confirmación
+    console.log(message.content); // URL of the confirmation link
 });
-Use code with caution.
-JavaScript
-Guardar el contenido HTML completo de un correo electrónico en un archivo:
-easyYopmail.readMessage('mi-correo', 'id-del-correo', { format: 'HTML', pathToSave: './emails' })
+```
+
+### 3. Save Full HTML Content of an Email to a File
+
+```javascript
+easyYopmail.readMessage('my-email', 'email-id', { format: 'HTML', pathToSave: './emails' })
 .then(message => {
-console.log('Correo electrónico guardado como archivo HTML');
+    console.log('Email saved as HTML file');
 });
-Use code with caution.
-JavaScript
-Código de ejemplo
+```
+
+## Code Example
+
+```javascript
 const easyYopmail = require('easy-yopmail');
 
 easyYopmail.getInbox('test@yopmail.com')
 .then(inbox => {
-const emailId = inbox.inbox[0].id;
+  const emailId = inbox.inbox[0].id;
 
-    easyYopmail.readMessage('test@yopmail.com', emailId, { format: 'HTML' }) 
-    .then(message => {
-        console.log(message.content); // Contenido del correo electrónico en HTML
-    });
+  easyYopmail.readMessage('test@yopmail.com', emailId, { format: 'HTML' }) 
+  .then(message => {
+      console.log(message.content); // HTML content of the email
+  });
 });
-Use code with caution.
+```
