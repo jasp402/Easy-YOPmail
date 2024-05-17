@@ -4,7 +4,6 @@
     <sitemap priority="0.35" change-frequency="monthly"/>
 
     <variables>
-        <custom-favicons>favico-48.ico</custom-favicons>
         <header-logo>logo.png</header-logo>
         <download-title>NPM Documentation</download-title>
         <download-page>https://www.npmjs.com/package/easy-yopmail</download-page>
@@ -21,16 +20,15 @@
     <footer>
         <copyright>Jasp402 | 2020-2024</copyright>
 
-        <social type="blog" href="link to a blog"></social>
-        <social type="twitter" href="link to a Twitter account"></social>
-        <social type="youtube" href="link to a Twitter account"></social>
-        <social type="linkedin" href="link to a Facebook account"></social>
-        <social type="email" href="link to a Facebook account"></social>
+        <social type="blog" href="https://medium.com/@jasp402"></social>
+        <social type="twitter" href="https://x.com/jasp402"></social>
+        <social type="youtube" href="https://www.youtube.com/@jasp402"></social>
+        <social type="linkedin" href="https://www.linkedin.com/in/jasp402/"></social>
 
-        <link href="https://slack.example.com">Slack community</link>
-        <link href="https://stackoverflow.com">StackOverflow</link>
-        <link href="https://example.com/terms-an-conditions.html">Terms and conditions</link>
-        <link href="https://example.com/code-of-conduct.html">Code of Conduct</link>
+        <link href="https://jasp402.com/">About the Author</link>
+        <link href="https://stackoverflow.com/users/5420562/jasp402">StackOverflow</link>
+        <link href="#">Terms and conditions</link>
+        <link href="#">Code of Conduct</link>
     </footer>
 
 </buildprofiles>

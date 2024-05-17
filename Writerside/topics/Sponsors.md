@@ -1,5 +1,6 @@
-# 💖 Supporting Easy-YOPMail: Become a Sponsor
+# 💖 Supporting
 
+#### Become a Sponsor
 We deeply appreciate your interest in supporting Easy-YOPMail! Your sponsorship helps us maintain and enhance the library, bringing valuable features and improvements to the community.
 
 Here are a few ways you can contribute:

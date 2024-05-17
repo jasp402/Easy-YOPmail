@@ -2,6 +2,16 @@
 
 The `getInbox()` function in the Easy-YOPMail library provides a streamlined way to access and retrieve the contents of a YOPmail inbox. This function is essential for managing temporary email addresses and interacting with received messages programmatically.
 
+
+## Input Parameters
+
+| Parameter | Type | Description | Optional |
+|---|---|---|---|
+| `mail` | String | The YOPmail email address (without the @yopmail.com domain). | No |
+| `search` | Object | An object containing search criteria to filter emails (e.g., { from: 'sender@example.com' }). | Yes |
+| `settings` | Object | An object containing settings for inbox retrieval (e.g., { LIMIT: 10 }). | Yes |
+
+
 ## Purpose
 
 The `getInbox()` function serves the following purposes:

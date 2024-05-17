@@ -2,6 +2,12 @@
 
 The `deleteInbox()` function in the Easy-YOPMail library provides a simple and efficient way to completely erase all emails within a specified YOPmail inbox. This function is especially useful when you need to clean up a temporary email address after its intended use, ensuring privacy and avoiding clutter.
 
+## Input Parameters
+
+| Parameter | Type | Description | Optional |
+|---|---|---|---|
+| `mail` | String | The YOPmail email address (without the @yopmail.com domain). | No |
+
 ## Purpose
 
 The main purpose of `deleteInbox()` is to provide a programmatic way to clear out all messages from a YOPmail inbox. This is beneficial for several reasons:

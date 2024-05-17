@@ -2,6 +2,13 @@
 
 The `deleteMessage()` function within the Easy-YOPMail library empowers developers to selectively remove individual emails from a YOPmail inbox. This function is valuable when you need to remove specific messages while retaining others, offering a more granular level of control over inbox management.
 
+## Input Parameters
+
+| Parameter | Type | Description | Optional |
+|---|---|---|---|
+| `mail` | String | The YOPmail email address (without the @yopmail.com domain). | No |
+| `id` | String | The unique ID of the email to delete. | No |
+
 ## Purpose
 
 The primary purpose of `deleteMessage()` is to provide a method for deleting specific emails from a YOPmail inbox based on their unique identifier. This is particularly useful for:

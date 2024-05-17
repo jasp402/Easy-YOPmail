@@ -2,6 +2,9 @@
 
 The `getMail()` function is a powerful tool offered by the Easy-YOPMail library that allows developers to dynamically generate random email addresses. This feature is especially useful in scenarios where a unique and temporary email address is required without the need for manual interaction with a web interface or complex configurations.
 
+## Input Parameters
+This method does not require any input parameters.
+
 ## Purpose
 
 The primary purpose of `getMail()` is to simplify the process of acquiring a temporary email address for various use cases, including:

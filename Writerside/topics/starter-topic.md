@@ -1,6 +1,6 @@
 [//]: # (<show-structure for="chapter,procedure" depth="2"/>)
 
-# 📧 EasyYopmail v5
+# 📧 EasyYopmail v5.x.x 
 
 ![Easy-YOPmail_title.png](Easy-YOPmail_title.png)
 <!--Writerside adds this topic when you create a new documentation project.
@@ -312,49 +312,13 @@ Here's an example of how to use the `writeMessage()` function:
 
 ## 🗑️ How to delete a temporary email? {id="title_8"}
 ![8.png](8.png)
-With Easy-Yopmail you have two options for deleting emails: you can delete a specific email using its ID with the deleteMessage() function or you can delete all emails in an inbox using the deleteInbox() function.
-Deleting a Specific Email
-Identify the Email ID: Use the getInbox() function to retrieve a list of emails in the inbox, including their IDs.
-Use the deleteMessage() Function: Call the function with the email address and the ID of the email you want to delete.
-Handle the Response: The function will return a message indicating whether the email was successfully deleted or not.
+With Easy-Yopmail you have two options for deleting emails: 
 
-```mermaid
-sequenceDiagram
-participant NodeJS
-participant EasyYopmail
-participant Yopmail
-NodeJS->>EasyYopmail: getInbox(mailAddress)
-activate EasyYopmail
-EasyYopmail->>Yopmail: Request inbox details
-Yopmail->>EasyYopmail: Return inbox details (including IDs)
-deactivate EasyYopmail
-NodeJS->>EasyYopmail: deleteMessage(mailAddress, emailId)
-activate EasyYopmail
-EasyYopmail->>Yopmail: Request to delete email with specific ID
-Yopmail->>EasyYopmail: Confirm deletion (success or failure)
-deactivate EasyYopmail
-NodeJS->>NodeJS: Process deletion confirmation
-```
+1. **Deleting a Specific Email:** This allows you to remove a single email using its unique ID.
+2. **Deleting the Entire Inbox:**  This option permanently erases all emails within the inbox.
 
-<procedure title="Deleting a Specific Email code" id="5" type="steps">
-    <step>
-            <code-block lang="javascript" collapsible="true" default-state="collapsed">
-                    const easyYopmail = require('easy-yopmail');
-                    easyYopmail.getInbox('example@yopmail.com')
-                    .then(inbox => {
-                    const emailIdToDelete = inbox.inbox[0].id; // Get the ID of the first email
-                    easyYopmail.deleteMessage('example@yopmail.com', emailIdToDelete)
-                    .then(response => {
-                    console.log(response); // Output: "The mail with ID [emailIdToDelete] has been successfully deleted."
-                    });
-                    });
-            </code-block>
-    </step>
-</procedure>
-
-
-Deleting All Emails in an Inbox
-Use the deleteInbox() Function: Call the function with the email address of the inbox you want to empty.
+### Deleting the Entire Inbox
+Use the **deleteInbox()** Function: Call the function with the email address of the inbox you want to empty.
 Handle the Response: The function will return a message indicating whether the inbox was successfully emptied or not. It will also tell you how many emails were deleted.
 
 ```mermaid
@@ -370,7 +334,6 @@ sequenceDiagram
     NodeJS->>NodeJS: Process deletion confirmation and number of emails deleted
 ```
 
-
 <procedure title="Deleting All Emails in an Inbox code" id="6" type="steps">
     <step>
             <code-block lang="javascript" collapsible="true" default-state="collapsed">
@@ -383,6 +346,8 @@ sequenceDiagram
     </step>
 </procedure>
 
+> To learn how to delete specific emails, check out the detailed documentation for the **deleteMessage()** function 
+> in the dedicated section. {style="note"}
 
 
 <seealso>

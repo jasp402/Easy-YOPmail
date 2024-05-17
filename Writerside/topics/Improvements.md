@@ -1,6 +1,6 @@
 # 🙌 Contributing
-### Suggesting Improvements
 
+### Suggesting Improvements
 We believe in the power of community collaboration to make Easy-YOPMail even better!  We welcome your ideas and suggestions for improvements. Here's how you can contribute:
 
 **1. Open an Issue:**

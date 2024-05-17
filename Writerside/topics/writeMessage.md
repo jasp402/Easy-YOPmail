@@ -2,6 +2,15 @@
 
 The `writeMessage()` function in the Easy-YOPMail library allows you to send emails from a YOPmail address. This function is particularly useful for automating tasks that involve sending emails, such as notifications, confirmations, or testing email workflows.
 
+## Input Parameters
+
+| Parameter | Type | Description | Optional |
+|---|---|---|---|
+| `mail` | String | The YOPmail email address (without the @yopmail.com domain) to send from. | No |
+| `to` | String | The recipient's email address. | No |
+| `subject` | String | The subject of the email. | No |
+| `body` | String | The body of the email. | No | 
+
 ## Purpose
 
 The primary purpose of `writeMessage()` is to provide a programmatic way to send emails using a YOPmail address. This can be beneficial for various scenarios, including:

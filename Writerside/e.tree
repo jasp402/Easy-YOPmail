@@ -18,10 +18,10 @@
         <toc-element topic="writeMessage.md"/>
         <toc-element topic="deleteMessage.md"/>
     </toc-element>
-    <toc-element topic="Improvements.md"/>
     <toc-element toc-title="Latest News">
         <toc-element topic="Announcements.md"/>
         <toc-element topic="Blog.md"/>
     </toc-element>
+    <toc-element topic="Improvements.md"/>
     <toc-element topic="Sponsors.md"/>
 </instance-profile>
