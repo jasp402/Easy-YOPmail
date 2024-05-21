@@ -1,6 +1,6 @@
 {
   "name": "easy-yopmail",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Easy-YOPMail (get mail address, inbox and read mail from YOPMail with nodeJS)",
   "main": "index.js",
   "engines": {
@@ -29,13 +29,33 @@
   "author": {
     "name": "Jesús Antonio Pérez Sandoval",
     "email": "jasp402@gmail.com",
-    "url": "https://jasp402.com/"
+    "url": "https://jasp402.com/",
+    "socials": {
+      "twitter": "https://twitter.com/jasp402",
+      "linkedin": "https://www.linkedin.com/in/jasp402/",
+      "github": "https://github.com/jasp402"
+    }
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jasp402/easy-yopmail/issues"
+    "url": "https://github.com/jasp402/easy-yopmail/issues",
+    "email": "support@jasp402.com"
   },
-  "homepage": "https://jasp402.gitbook.io/easy-yopmail/",
+  "homepage": "https://jasp402.github.io/Easy-YOPmail/starter-topic.html",
+  "funding": [
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/jasp402"
+    },
+    {
+      "type": "buymeacoffee",
+      "url": "https://buymeacoffee.com/wjton2s"
+    },
+    {
+      "type": "kofi",
+      "url": "https://ko-fi.com/jasp402"
+    }
+  ],
   "dependencies": {
     "cheerio": "^1.0.0-rc.12"
   }
