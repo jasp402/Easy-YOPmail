@@ -16,6 +16,7 @@ The `readMessage()` function in Easy-Yopmail allows you to read the content of a
 - **`selector`**: (Optional) A CSS selector to target a specific element within the HTML email body.
 - **`attribute`**: (Optional) If a selector is provided, this parameter specifies the attribute of the element to be returned (e.g., "href" for a link).
 - **`pathToSave`**: (Optional) Path to save the email HTML as a file.
+- **`saveAttachments`**: (Optional) Boolean flag to save email attachments to the project download folder.
 
 ## Output
 
@@ -26,6 +27,8 @@ The `readMessage()` function returns a promise that resolves with an object cont
 - **`from`**: The sender's email address.
 - **`date`**: The date the email was received.
 - **`deliverability`**: Information about the email delivery.
+- **`attachments`**: An array of attachment objects (if `saveAttachments` is enabled).
+- **`saveAttachments`**: A boolean flag indicating if attachments were saved.
 - **`format`**: The format of the returned content ("TXT" or "HTML").
 - **`selector`**: The CSS selector used (if provided).
 - **`eq`**: The index of the selected element (if provided).
@@ -33,6 +36,7 @@ The `readMessage()` function returns a promise that resolves with an object cont
 - **`pathToSave`**: The path where the HTML was saved (if provided).
 - **`content`**: The content of the email in the specified format.
 - **`info`**: A list of warnings or informational messages.
+
 
 ## Mermaid Diagram
 
@@ -83,6 +87,37 @@ easyYopmail.readMessage('my-email', 'email-id', { format: 'HTML', pathToSave: '.
     console.log('Email saved as HTML file');
 });
 ```
+
+### 4. Read Email Content and Save Attachments
+
+```javascript   
+easyYopmail.readMessage('my-email', 'email-id', { saveAttachment: true })
+.then(message => {
+    if (message.saveAttachments) {
+        console.log('Attachments saved to download folder');
+    }
+});
+
+// Output:
+// Attachments saved to download folder
+attachments: [
+    {
+        fullName: 'prueba1.rar',
+        name: 'prueba1',
+        extension: 'rar',
+        file: 'https://yopmail.com//cid?b=jasp402&id=e_ZwDkZGN4ZGVmZQR5ZQNjAGD4AwL5BD==&cd=a&pj=f_m38pqbyv1'
+    },
+    {
+        fullName: 'prueba2.zip',
+        name: 'prueba2',
+        extension: 'zip',
+        file: 'https://yopmail.com//cid?b=jasp402&id=e_ZwDkZGN4ZGVmZQR5ZQNjAGD4AwL5BD==&cd=a&pj=f_m38pqbyg0'
+    }
+]
+```
+![image.png](image.png)
+>**Note:** In order for attachments to be downloaded, the email must contain such files. Please check if your email contains attachments before downloading. This feature also negatively impacts performance, as responses are blocked until the download is complete.
+>{style="warning"}
 
 ## Code Example
 
