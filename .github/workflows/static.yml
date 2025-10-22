@@ -38,7 +38,11 @@ jobs:
         with:
           # Upload entire repository
           name: github-pages
-          path: '.'
+          path: |
+            .
+            !./.git
+            !./.github
+            !./node_modules
           retention-days: 1
       - name: Deploy to GitHub Pages
         id: deployment
