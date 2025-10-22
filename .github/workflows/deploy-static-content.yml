@@ -2,9 +2,13 @@
 name: 📦Deploy static content
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+  # Se ejecuta DESPUÉS de que "Build documentation" se complete exitosamente
+  workflow_run:
+    workflows: ["🌐 Build documentation"]
+    types:
+      - completed
+    branches:
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,6 +28,8 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
+    # IMPORTANTE: Solo se ejecuta si el workflow anterior fue exitoso
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -34,16 +40,14 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          name: github-pages
           path: |
             .
             !./.git
             !./.github
             !./node_modules
-          retention-days: 1
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
