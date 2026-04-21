@@ -590,12 +590,25 @@
       border-radius: 4px;
     }
 
+    /* ── Sidebar Backdrop ──────────────────────────────────────────── */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 140;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(2px);
+    }
+    .sidebar-backdrop.visible { display: block; }
+
     /* ── Mobile Bottom Nav ──────────────────────────────────────── */
     .mobile-nav {
       display: none;
       grid-column: 1 / -1;
       background: var(--surface);
       border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 200;
     }
     .mnav-btn {
       flex: 1;
@@ -628,7 +641,7 @@
     @media (max-width: 900px) {
       .app { grid-template-columns: 260px 1fr; }
     }
-    @media (max-width: 700px) {
+    @media (max-width: 768px) {
       .app {
         grid-template-columns: 1fr;
         grid-template-rows: 52px 1fr 58px;
@@ -782,6 +795,9 @@
       </div>
     </main>
 
+    <!-- ── Sidebar Backdrop ── -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="mobileShow('message')"></div>
+
     <!-- ── Mobile Nav ── -->
     <nav class="mobile-nav" id="mobileNav">
       <button class="mnav-btn active" id="mnavInbox" onclick="mobileShow('inbox')">
@@ -896,9 +912,9 @@
       if (e.key === 'n') openCompose();
     });
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 700) {
+      if (window.innerWidth > 768) {
         get('sidebar').classList.remove('open');
-        get('main').style.display = '';
+        get('sidebarBackdrop').classList.remove('visible');
       }
     });
   }
@@ -1121,7 +1137,7 @@
                 </div>`
     });
 
-    if (window.innerWidth <= 700) mobileShow('message');
+    if (window.innerWidth <= 768) mobileShow('message');
 
     try {
       const r = await fetch(`/api/message/${enc(S.email)}/${id}`);
@@ -1315,16 +1331,16 @@
 
   // ── Mobile navigation ──────────────────────────────────────────────
   function mobileShow(view) {
-    const sidebar = get('sidebar');
-    const main    = get('main');
+    const sidebar  = get('sidebar');
+    const backdrop = get('sidebarBackdrop');
     document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('active'));
     if (view === 'inbox') {
       sidebar.classList.add('open');
-      main.style.display = 'none';
+      backdrop.classList.add('visible');
       get('mnavInbox').classList.add('active');
     } else {
       sidebar.classList.remove('open');
-      main.style.display = '';
+      backdrop.classList.remove('visible');
       get('mnavMsg').classList.add('active');
     }
   }
