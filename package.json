@@ -7,10 +7,11 @@
     "node": ">=18"
   },
   "scripts": {
+    "start": "node server.js",
     "build": "babel src --out-dir dist && babel index.js --out-file dist/index.js",
     "release": "release-it",
-    "test": "node tests/e2eTest.spec.js",
-    "unit.test": "node tests/unitTest.spec.js"
+    "test": "node src/test.spec.js",
+    "unit.test": "node src/test.spec.js"
   },
   "repository": {
     "type": "git",
@@ -57,6 +58,8 @@
     }
   ],
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12"
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^5.2.1",
+    "puppeteer": "^24.42.0"
   }
 }

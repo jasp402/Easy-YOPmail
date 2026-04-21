@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy-YOPmail</title>
+  <style>
+    /* ── CSS Variables ──────────────────────────────────────────── */
+    :root {
+      --transition: 0.2s ease;
+    }
+    [data-theme="dark"] {
+      --bg:           #13141f;
+      --surface:      #1e2030;
+      --card:         #252839;
+      --border:       #363b54;
+      --text:         #c0caf5;
+      --text-muted:   #565f89;
+      --accent:       #7aa2f7;
+      --accent-dim:   #1f2d4a;
+      --success:      #9ece6a;
+      --danger:       #f7768e;
+      --warning:      #e0af68;
+      --shadow:       rgba(0,0,0,0.5);
+      --scrollbar:    #363b54;
+      --item-hover:   #2a2e45;
+      --item-active:  #1f2d4a;
+      --badge-text:   #13141f;
+      --logo-glow:    rgba(122,162,247,0.25);
+    }
+    [data-theme="light"] {
+      --bg:           #f0f2f5;
+      --surface:      #ffffff;
+      --card:         #f6f8fa;
+      --border:       #d0d7de;
+      --text:         #24292f;
+      --text-muted:   #57606a;
+      --accent:       #0969da;
+      --accent-dim:   #ddf4ff;
+      --success:      #1a7f37;
+      --danger:       #cf222e;
+      --warning:      #9a6700;
+      --shadow:       rgba(0,0,0,0.1);
+      --scrollbar:    #d0d7de;
+      --item-hover:   #f6f8fa;
+      --item-active:  #ddf4ff;
+      --badge-text:   #ffffff;
+      --logo-glow:    rgba(9,105,218,0.15);
+    }
+
+    /* ── Reset ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+      overflow: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+    button { font-family: inherit; cursor: pointer; }
+    input, textarea { font-family: inherit; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+
+    /* ── App Grid ───────────────────────────────────────────────── */
+    .app {
+      display: grid;
+      grid-template-rows: 52px 1fr;
+      grid-template-columns: 300px 1fr;
+      height: 100vh;
+    }
+
+    /* ── Navbar ─────────────────────────────────────────────────── */
+    .navbar {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      z-index: 200;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.3px;
+      user-select: none;
+    }
+    .brand-icon {
+      width: 32px; height: 32px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      box-shadow: 0 0 12px var(--logo-glow);
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 10px;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      transition: background var(--transition);
+    }
+    .status-dot.disconnected { background: var(--warning); }
+
+    /* ── Sidebar ────────────────────────────────────────────────── */
+    .sidebar {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform var(--transition);
+    }
+
+    /* Email address card */
+    .email-card {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .email-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .email-address-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+    }
+    .email-address {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      word-break: break-all;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      min-height: 19px;
+    }
+    .email-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Inbox header */
+    .inbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px 10px;
+    }
+    .inbox-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .inbox-badge {
+      background: var(--accent);
+      color: var(--badge-text);
+      border-radius: 10px;
+      padding: 2px 7px;
+      font-size: 10px;
+      font-weight: 700;
+      min-width: 20px;
+      text-align: center;
+    }
+    .refresh-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .countdown-chip {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2px 8px;
+      font-variant-numeric: tabular-nums;
+      min-width: 34px;
+      text-align: center;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .countdown-chip.urgent {
+      color: var(--warning);
+      border-color: var(--warning);
+    }
+
+    /* Inbox list */
+    .inbox-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 4px 0;
+    }
+    .email-item {
+      position: relative;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: background var(--transition);
+      border-bottom: 1px solid transparent;
+    }
+    .email-item:hover { background: var(--item-hover); }
+    .email-item.active {
+      background: var(--item-active);
+      border-left: 3px solid var(--accent);
+      padding-left: 11px;
+    }
+    .email-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+    .email-item-sender {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow: hidden;
+    }
+    .unread-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .from {
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text);
+    }
+    .time {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .subject {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 13px;
+      padding-right: 22px;
+    }
+    .item-del {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--danger);
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .email-item:hover .item-del { opacity: 1; }
+
+    /* Empty inbox */
+    .inbox-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      gap: 8px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .inbox-empty-icon { font-size: 36px; opacity: 0.4; margin-bottom: 4px; }
+    .inbox-empty-title { font-size: 13px; font-weight: 600; }
+    .inbox-empty-sub { font-size: 11px; }
+
+    /* Sidebar footer */
+    .sidebar-footer {
+      padding: 12px 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      background: var(--surface);
+    }
+
+    /* ── Main Content ────────────────────────────────────────────── */
+    .main {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    /* Empty state */
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: var(--text-muted);
+      animation: fadeIn 0.3s ease;
+    }
+    .empty-icon { font-size: 72px; opacity: 0.2; }
+    .empty-title { font-size: 20px; font-weight: 600; color: var(--text); opacity: 0.5; }
+    .empty-sub { font-size: 13px; max-width: 260px; text-align: center; }
+
+    /* Message viewer */
+    .msg-viewer {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+      animation: fadeIn 0.2s ease;
+    }
+    .msg-viewer.visible { display: flex; }
+
+    .msg-header {
+      padding: 20px 24px 16px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .msg-subject {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .msg-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .msg-meta span { display: flex; align-items: center; gap: 5px; }
+    .msg-meta strong { color: var(--text); }
+    .msg-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .msg-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+    .msg-iframe-wrap {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .msg-iframe {
+      width: 100%;
+      border: none;
+      display: block;
+      min-height: 200px;
+    }
+    .msg-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+      white-space: pre-wrap;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    /* ── Buttons ─────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 500;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), opacity var(--transition);
+      white-space: nowrap;
+      user-select: none;
+    }
+    .btn:hover { background: var(--card); }
+    .btn:active { opacity: 0.75; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { filter: brightness(1.1); background: var(--accent); }
+
+    .btn-danger {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+    .btn-danger:hover { background: var(--danger); color: #fff; }
+
+    .btn-success {
+      background: var(--success);
+      border-color: var(--success);
+      color: #fff;
+    }
+
+    .btn-sm { padding: 4px 9px; font-size: 11px; }
+    .btn-full { flex: 1; justify-content: center; }
+
+    .icon-btn {
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      flex-shrink: 0;
+    }
+    .icon-btn:hover { background: var(--card); color: var(--text); }
+    .icon-btn.spin svg { animation: rotate 0.8s linear infinite; }
+
+    /* ── Modal ───────────────────────────────────────────────────── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .overlay.show { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 20px 60px var(--shadow);
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.2s;
+    }
+    .overlay.show .modal { transform: scale(1) translateY(0); }
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-head h3 { font-size: 15px; font-weight: 700; }
+    .modal-body { padding: 20px; }
+    .modal-foot {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      margin-top: 4px;
+    }
+
+    /* Form */
+    .fgroup { margin-bottom: 14px; }
+    .fgroup:last-child { margin-bottom: 0; }
+    .fgroup label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .fgroup input,
+    .fgroup textarea {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      transition: border-color var(--transition);
+      resize: vertical;
+    }
+    .fgroup input::placeholder,
+    .fgroup textarea::placeholder { color: var(--text-muted); opacity: 0.6; }
+    .fgroup input:focus,
+    .fgroup textarea:focus { border-color: var(--accent); }
+
+    /* ── Toast ───────────────────────────────────────────────────── */
+    #toasts {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 8px 24px var(--shadow);
+      font-size: 13px;
+      max-width: 340px;
+      animation: toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      pointer-events: all;
+    }
+    .toast-success { border-left: 4px solid var(--success); }
+    .toast-error   { border-left: 4px solid var(--danger); }
+    .toast-info    { border-left: 4px solid var(--accent); }
+    .toast-warn    { border-left: 4px solid var(--warning); }
+    .toast-out { animation: toastOut 0.25s ease forwards; }
+
+    /* ── Spinner / Loading ───────────────────────────────────────── */
+    .spin-inline {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: rotate 0.7s linear infinite;
+    }
+    .skeleton-line {
+      height: 12px;
+      background: linear-gradient(90deg, var(--card) 25%, var(--border) 50%, var(--card) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 4px;
+    }
+
+    /* ── Sidebar Backdrop ──────────────────────────────────────────── */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 140;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(2px);
+    }
+    .sidebar-backdrop.visible { display: block; }
+
+    /* ── Mobile Bottom Nav ──────────────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      grid-column: 1 / -1;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 200;
+    }
+    .mnav-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 8px 4px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color var(--transition);
+    }
+    .mnav-btn .micon { font-size: 20px; }
+    .mnav-btn.active { color: var(--accent); }
+
+    /* ── Animations ──────────────────────────────────────────────── */
+    @keyframes rotate  { to { transform: rotate(360deg); } }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+    @keyframes fadeIn  { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes toastIn { from { opacity:0; transform:translateX(40px) scale(0.9); } to { opacity:1; transform:translateX(0) scale(1); } }
+    @keyframes toastOut{ from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(40px); } }
+    @keyframes pulse   { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .app { grid-template-columns: 260px 1fr; }
+    }
+    @media (max-width: 768px) {
+      .app {
+        grid-template-columns: 1fr;
+        grid-template-rows: 52px 1fr 58px;
+      }
+      .sidebar {
+        position: fixed;
+        top: 52px; left: 0; right: 0; bottom: 58px;
+        transform: translateX(-100%);
+        z-index: 150;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      .sidebar.open { transform: translateX(0); }
+      .main { grid-column: 1; }
+      .mobile-nav { display: flex; }
+      #toasts { bottom: 70px; right: 12px; left: 12px; }
+      .toast { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="toasts"></div>
+
+  <div class="app" id="app">
+
+    <!-- ── Navbar ── -->
+    <nav class="navbar">
+      <div class="brand">
+        <div class="brand-icon">📧</div>
+        <span>Easy-YOPmail</span>
+      </div>
+      <div class="nav-right">
+        <div class="status-pill">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusText">Connecting…</span>
+        </div>
+        <button class="icon-btn" id="themeBtn" title="Toggle theme">
+          <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar" id="sidebar">
+
+      <!-- Email address -->
+      <div class="email-card">
+        <div class="email-label">Your Temporary Email</div>
+        <!-- View mode -->
+        <div class="email-address-wrap" id="emailViewWrap">
+          <div class="email-address" id="emailAddr"><span class="spin-inline"></span></div>
+          <button class="icon-btn" id="editEmailBtn" title="Edit / use custom email" style="width:26px;height:26px;flex-shrink:0">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+        </div>
+        <!-- Edit mode -->
+        <div class="email-address-wrap" id="emailEditWrap" style="display:none">
+          <input type="text" id="emailInput" placeholder="yourname@yopmail.com"
+            style="flex:1;background:transparent;border:none;outline:none;color:var(--accent);font-size:13px;font-weight:600;font-family:monospace;min-width:0">
+          <button class="icon-btn" id="confirmEmailBtn" title="Use this email" style="width:26px;height:26px;flex-shrink:0;color:var(--success)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+          </button>
+          <button class="icon-btn" id="cancelEditBtn" title="Cancel" style="width:26px;height:26px;flex-shrink:0">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <div class="email-actions">
+          <button class="btn btn-sm" id="copyBtn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+          <button class="btn btn-sm btn-primary btn-full" id="newEmailBtn">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            New Email
+          </button>
+        </div>
+      </div>
+
+      <!-- Inbox header -->
+      <div class="inbox-header">
+        <div class="inbox-title">
+          Inbox
+          <span class="inbox-badge" id="inboxBadge">0</span>
+        </div>
+        <div class="refresh-group">
+          <span class="countdown-chip" id="countdown">60s</span>
+          <button class="icon-btn" id="refreshBtn" title="Refresh inbox (R)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+              <path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Inbox list -->
+      <div class="inbox-list" id="inboxList">
+        <div class="inbox-empty">
+          <div class="inbox-empty-icon">📭</div>
+          <div class="inbox-empty-title">No emails yet</div>
+          <div class="inbox-empty-sub">Auto-checking every 30 seconds…</div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="sidebar-footer">
+        <button class="btn btn-sm btn-danger" id="clearAllBtn" style="flex:1;justify-content:center">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+          Clear All
+        </button>
+        <button class="btn btn-sm btn-primary" id="composeBtn" style="flex:1;justify-content:center">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" fill="none"/><path d="M20 4L12 13 4 4"/></svg>
+          Compose
+        </button>
+      </div>
+    </aside>
+
+    <!-- ── Main Content ── -->
+    <main class="main" id="main">
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">💌</div>
+        <div class="empty-title">Select an email to read</div>
+        <div class="empty-sub">Choose a message from your inbox to view its content here.</div>
+      </div>
+
+      <!-- Message viewer (hidden by default) -->
+      <div class="msg-viewer" id="msgViewer">
+        <div class="msg-header">
+          <div class="msg-subject" id="msgSubject">—</div>
+          <div class="msg-meta">
+            <span>👤 <strong id="msgFrom"></strong></span>
+            <span>📅 <span id="msgDate"></span></span>
+            <span id="msgDeliverWrap" style="display:none">📊 <span id="msgDeliver"></span></span>
+          </div>
+          <div class="msg-actions">
+            <button class="btn btn-sm btn-danger" id="deleteMsgBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+              Delete
+            </button>
+            <button class="btn btn-sm" id="closeMsgBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              Close
+            </button>
+          </div>
+        </div>
+        <div class="msg-body" id="msgBody"></div>
+      </div>
+    </main>
+
+    <!-- ── Sidebar Backdrop ── -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="mobileShow('message')"></div>
+
+    <!-- ── Mobile Nav ── -->
+    <nav class="mobile-nav" id="mobileNav">
+      <button class="mnav-btn active" id="mnavInbox" onclick="mobileShow('inbox')">
+        <span class="micon">📥</span><span>Inbox</span>
+      </button>
+      <button class="mnav-btn" id="mnavCompose" onclick="openCompose()">
+        <span class="micon">✉️</span><span>Compose</span>
+      </button>
+      <button class="mnav-btn" id="mnavMsg" onclick="mobileShow('message')">
+        <span class="micon">📧</span><span>Message</span>
+      </button>
+    </nav>
+  </div><!-- /app -->
+
+  <!-- ── Compose Modal ── -->
+  <div class="overlay" id="composeOverlay">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:6px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Compose Email
+        </h3>
+        <button class="icon-btn" onclick="closeCompose()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="composeForm" onsubmit="handleSend(event)">
+          <div class="fgroup">
+            <label>From (your yopmail address)</label>
+            <input type="text" id="cFrom" placeholder="yourname@yopmail.com" required autocomplete="off">
+          </div>
+          <div class="fgroup">
+            <label>To</label>
+            <input type="email" id="cTo" placeholder="recipient@example.com" required autocomplete="off">
+          </div>
+          <div class="fgroup">
+            <label>Subject</label>
+            <input type="text" id="cSubject" placeholder="Email subject" required>
+          </div>
+          <div class="fgroup">
+            <label>Message</label>
+            <textarea id="cBody" rows="6" placeholder="Write your message here…" required></textarea>
+          </div>
+          <div class="modal-foot">
+            <button type="button" class="btn" onclick="closeCompose()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="sendBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2 15 22 11 13 2 9l20-7z"/></svg>
+              Send Email
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ╔══════════════════════════════════════════════════════════════════╗
+  // ║                    Easy-YOPmail Frontend                        ║
+  // ╚══════════════════════════════════════════════════════════════════╝
+
+  // ── State ──────────────────────────────────────────────────────────
+  const S = {
+    email:       null,
+    inbox:       [],
+    activeMsgId: null,
+    countdown:   60,
+    theme:       localStorage.getItem('yop_theme') || 'dark',
+  };
+
+  // ── Init ───────────────────────────────────────────────────────────
+  document.documentElement.setAttribute('data-theme', S.theme);
+  updateThemeIcon();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    bindEvents();
+    connectSSE();
+    // Restore saved email — only generate new one if none saved
+    const saved = localStorage.getItem('yop_email');
+    if (saved) {
+      loadEmail(saved);
+    } else {
+      generateEmail();
+    }
+    startCountdown();
+  });
+
+  // ── Event bindings ─────────────────────────────────────────────────
+  function bindEvents() {
+    get('themeBtn').onclick  = toggleTheme;
+    get('copyBtn').onclick   = copyEmail;
+    get('newEmailBtn').onclick = handleNewEmail;
+    get('refreshBtn').onclick  = () => { refreshInbox(); resetCountdown(); };
+    get('clearAllBtn').onclick = handleClearAll;
+    get('composeBtn').onclick  = openCompose;
+    get('deleteMsgBtn').onclick = handleDeleteMsg;
+    get('closeMsgBtn').onclick  = closeMsg;
+    get('composeOverlay').onclick = e => { if (e.target === e.currentTarget) closeCompose(); };
+    get('editEmailBtn').onclick   = startEditEmail;
+    get('cancelEditBtn').onclick  = cancelEditEmail;
+    get('confirmEmailBtn').onclick = confirmEditEmail;
+    get('emailInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter')  { e.preventDefault(); confirmEditEmail(); }
+      if (e.key === 'Escape') cancelEditEmail();
+    });
+
+    document.addEventListener('keydown', e => {
+      const tag = document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if (e.key === 'Escape') closeCompose();
+      if (e.key === 'r') { refreshInbox(); resetCountdown(); }
+      if (e.key === 'n') openCompose();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        get('sidebar').classList.remove('open');
+        get('sidebarBackdrop').classList.remove('visible');
+      }
+    });
+  }
+
+  function get(id) { return document.getElementById(id); }
+
+  // ── SSE ────────────────────────────────────────────────────────────
+  function connectSSE() {
+    const es = new EventSource('/events');
+    es.onopen = () => setStatus(true, 'Live');
+    es.onerror = () => setStatus(false, 'Reconnecting…');
+    es.onmessage = e => {
+      try {
+        const d = JSON.parse(e.data);
+        if (d.type === 'connected') setStatus(true, 'Live');
+        if (d.type === 'inbox_update') {
+          // Only apply SSE update if it matches the currently active email
+          if (d.email && d.email !== S.email) return;
+          const prev = S.inbox.length;
+          renderInbox(d.data);
+          if (S.inbox.length > prev) {
+            const n = S.inbox.length - prev;
+            toast(`📬 ${n} new email${n>1?'s':''} arrived!`, 'info');
+            resetCountdown();
+          }
+        }
+      } catch { /* ignore */ }
+    };
+  }
+
+  function setStatus(ok, text) {
+    get('statusDot').className  = 'status-dot' + (ok ? '' : ' disconnected');
+    get('statusText').textContent = text;
+  }
+
+  // ── Theme ──────────────────────────────────────────────────────────
+  function toggleTheme() {
+    S.theme = S.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', S.theme);
+    localStorage.setItem('yop_theme', S.theme);
+    updateThemeIcon();
+  }
+  function updateThemeIcon() {
+    const dark = S.theme === 'dark';
+    get('themeIcon').innerHTML = dark
+      ? '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>'
+      : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  }
+
+  // ── Load existing email (from localStorage) ───────────────────────
+  async function loadEmail(email) {
+    S.email = email;
+    get('emailAddr').textContent = email;
+    get('cFrom').value = email;
+    await refreshInbox(true);
+  }
+
+  // ── Generate Email ─────────────────────────────────────────────────
+  async function generateEmail() {
+    const el = get('emailAddr');
+    el.innerHTML = '<span class="spin-inline"></span>';
+    get('newEmailBtn').disabled = true;
+    try {
+      const r = await fetch('/api/generate-email');
+      const d = await r.json();
+      if (d.success) {
+        S.email = d.email;
+        el.textContent = d.email;
+        get('cFrom').value = d.email;
+        localStorage.setItem('yop_email', d.email);
+        await refreshInbox(true);
+        toast(`✨ Generated: ${d.email}`, 'success');
+      } else {
+        el.textContent = 'Error – retry';
+        toast('Failed to generate email', 'error');
+      }
+    } catch {
+      el.textContent = 'Connection error';
+      toast('Server unreachable', 'error');
+    } finally {
+      get('newEmailBtn').disabled = false;
+    }
+  }
+
+  async function handleNewEmail() {
+    if (!confirm('Generate a new random address?\nYour current inbox will be lost from view.')) return;
+    localStorage.removeItem('yop_email');
+    S.activeMsgId = null;
+    closeMsg();
+    S.inbox = [];
+    await generateEmail();
+  }
+
+  // ── Edit email address manually ────────────────────────────────────
+  function startEditEmail() {
+    get('emailViewWrap').style.display = 'none';
+    get('emailEditWrap').style.display = '';
+    const inp = get('emailInput');
+    inp.value = S.email || '';
+    inp.focus();
+    inp.select();
+  }
+  function cancelEditEmail() {
+    get('emailEditWrap').style.display = 'none';
+    get('emailViewWrap').style.display = '';
+  }
+  async function confirmEditEmail() {
+    const raw = get('emailInput').value.trim().toLowerCase();
+    if (!raw) return;
+    // Accept just the username part (auto-append @yopmail.com)
+    const email = raw.includes('@') ? raw : raw + '@yopmail.com';
+    cancelEditEmail();
+    S.activeMsgId = null;
+    closeMsg();
+    S.inbox = [];
+    S.email = email;
+    get('emailAddr').textContent = email;
+    get('cFrom').value = email;
+    localStorage.setItem('yop_email', email);
+    renderInbox({ inbox: [] });
+    await refreshInbox(true);
+    toast(`📥 Switched to: ${email}`, 'info');
+  }
+
+  // ── Copy ───────────────────────────────────────────────────────────
+  async function copyEmail() {
+    if (!S.email) return;
+    try {
+      await navigator.clipboard.writeText(S.email);
+    } catch {
+      const t = document.createElement('textarea');
+      t.value = S.email;
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand('copy');
+      t.remove();
+    }
+    const btn = get('copyBtn');
+    btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied!';
+    setTimeout(() => btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy', 2200);
+  }
+
+  // ── Refresh Inbox ──────────────────────────────────────────────────
+  async function refreshInbox(silent = false) {
+    if (!S.email) { console.warn('[Inbox] refreshInbox called but S.email is null'); return; }
+    const btn = get('refreshBtn');
+    btn.classList.add('spin');
+    btn.disabled = true;
+    console.log(`[Inbox] Fetching inbox for: ${S.email}`);
+    try {
+      const r = await fetch(`/api/inbox/${enc(S.email)}`);
+      const d = await r.json();
+      console.log('[Inbox] Response:', d);
+      if (d.success) {
+        const count = (d.data?.inbox || []).length;
+        console.log(`[Inbox] ${count} email(s)${d.fromCache ? ' (cache)' : ''}${d.captchaRequired ? ' [CAPTCHA BLOCKED]' : ''}`);
+        if (d.captchaRequired) {
+          showInboxCaptchaNotice(d.yopmailUrl);
+          if (!silent) toast('⚠️ YOPmail minta CAPTCHA – buka di browser lalu refresh', 'warn');
+        } else {
+          renderInbox(d.data);
+          if (!silent) toast(d.fromCache ? `🗃️ ${count} email (cache)` : 'Inbox refreshed', 'info');
+        }
+      } else {
+        console.error('[Inbox] Error from server:', d.error);
+        if (!silent) toast(d.error || 'Refresh failed', 'error');
+      }
+    } catch (err) {
+      console.error('[Inbox] Fetch exception:', err);
+      if (!silent) toast('Connection error', 'error');
+    } finally {
+      btn.classList.remove('spin');
+      btn.disabled = false;
+    }
+  }
+
+  function showInboxCaptchaNotice(yopmailUrl) {
+    const list = get('inboxList');
+    list.innerHTML = `
+      <div class="inbox-empty" style="padding:32px 16px">
+        <div class="inbox-empty-icon">🤖</div>
+        <div class="inbox-empty-title">CAPTCHA diperlukan</div>
+        <div class="inbox-empty-sub">
+          YOPmail memblokir request otomatis.<br>
+          1. Buka YOPmail di browser<br>
+          2. Selesaikan CAPTCHA<br>
+          3. Kembali &amp; klik Refresh
+        </div>
+        <a href="${yopmailUrl}" target="_blank" rel="noopener noreferrer"
+           class="btn btn-primary btn-sm" style="margin-top:10px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Buka YOPmail
+        </a>
+      </div>`;
+  }
+
+  // ── Render Inbox ───────────────────────────────────────────────────
+  function renderInbox(data) {
+    const prevIds = new Set(S.inbox.map(e => e.id));
+    S.inbox = (data.inbox || []);
+    const total = S.inbox.length;
+    get('inboxBadge').textContent = total;
+    console.log(`[Render] renderInbox total=${total}`, S.inbox);
+
+    const list = get('inboxList');
+    if (total === 0) {
+      list.innerHTML = `
+        <div class="inbox-empty">
+          <div class="inbox-empty-icon">📭</div>
+          <div class="inbox-empty-title">No emails yet</div>
+          <div class="inbox-empty-sub">Auto-checking every 60 seconds…</div>
+        </div>`;
+      return;
+    }
+
+    list.innerHTML = S.inbox.map(item => {
+      const isNew      = prevIds.size > 0 && !prevIds.has(item.id);
+      const isActive   = item.id === S.activeMsgId;
+      const from       = esc(item.from    || 'Unknown');
+      const subject    = esc(item.subject || '(no subject)');
+      const timestamp  = esc(item.timestamp || '');
+      return `
+        <div class="email-item${isActive ? ' active' : ''}" id="item-${item.id}" onclick="readMessage('${item.id}')">
+          <div class="email-item-top">
+            <div class="email-item-sender">
+              ${isNew ? '<div class="unread-dot"></div>' : '<div style="width:7px"></div>'}
+              <span class="from">${from}</span>
+            </div>
+            <span class="time">${timestamp}</span>
+          </div>
+          <div class="subject">${subject}</div>
+          <button class="item-del" onclick="deleteItem(event,'${item.id}')" title="Delete">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
+          </button>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Read Message ───────────────────────────────────────────────────
+  async function readMessage(id) {
+    S.activeMsgId = id;
+    document.querySelectorAll('.email-item').forEach(el => el.classList.remove('active'));
+    const item = get(`item-${id}`);
+    if (item) item.classList.add('active');
+
+    // Show loading state
+    showViewer({
+      subject: 'Loading…',
+      from: '', date: '',
+      content: `<div style="display:flex;align-items:center;justify-content:center;height:200px">
+                  <div class="spin-inline" style="width:32px;height:32px;border-width:3px"></div>
+                </div>`
+    });
+
+    if (window.innerWidth <= 768) mobileShow('message');
+
+    try {
+      const r = await fetch(`/api/message/${enc(S.email)}/${id}`);
+      const d = await r.json();
+      if (d.success) {
+        showViewer(d.data);
+        get('deleteMsgBtn').dataset.id = id;
+        if (d.data.captchaRequired) showCaptchaNotice(d.data.yopmailUrl, id);
+      } else {
+        toast(d.error || 'Could not load message', 'error');
+        closeMsg();
+      }
+    } catch {
+      toast('Connection error', 'error');
+      closeMsg();
+    }
+  }
+
+  function showViewer(msg) {
+    get('emptyState').style.display = 'none';
+    const viewer = get('msgViewer');
+    viewer.classList.add('visible');
+
+    get('msgSubject').textContent = msg.subject || '(No Subject)';
+    get('msgFrom').textContent    = msg.from    || '';
+    get('msgDate').textContent    = msg.date    || '';
+
+    if (msg.deliverability) {
+      get('msgDeliver').textContent   = msg.deliverability;
+      get('msgDeliverWrap').style.display = '';
+    } else {
+      get('msgDeliverWrap').style.display = 'none';
+    }
+
+    const body = get('msgBody');
+    body.innerHTML = '';
+
+    const content = msg.content;
+    if (!content) {
+      body.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:40px">No content available</div>';
+      return;
+    }
+
+    // If it looks like HTML, render in sandboxed iframe
+    if (typeof content === 'string' && /<[a-z][\s\S]*>/i.test(content)) {
+      const wrap  = document.createElement('div');
+      wrap.className = 'msg-iframe-wrap';
+      const frame = document.createElement('iframe');
+      frame.className = 'msg-iframe';
+      frame.setAttribute('sandbox', 'allow-same-origin allow-scripts');
+      frame.setAttribute('frameborder', '0');
+      const fullHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+        <style>body{font-family:Arial,sans-serif;margin:16px;word-wrap:break-word;}img{max-width:100%;}</style>
+        </head><body>${content}</body></html>`;
+      frame.srcdoc = fullHtml;
+      frame.onload = function() {
+        try {
+          const h = this.contentDocument.documentElement.scrollHeight;
+          this.style.height = (h + 8) + 'px';
+        } catch { this.style.height = '500px'; }
+      };
+      wrap.appendChild(frame);
+      body.appendChild(wrap);
+    } else {
+      const pre = document.createElement('pre');
+      pre.className = 'msg-text';
+      pre.textContent = Array.isArray(content) ? content.join('\n') : String(content);
+      body.appendChild(pre);
+    }
+  }
+
+  function showCaptchaNotice(yopmailUrl, msgId) {
+    const body = get('msgBody');
+    body.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:48px 24px;text-align:center;color:var(--text-muted)">
+        <div style="font-size:52px">🤖</div>
+        <div style="font-size:16px;font-weight:700;color:var(--text)">CAPTCHA diperlukan</div>
+        <div style="font-size:13px;max-width:320px;line-height:1.6">
+          YOPmail mendeteksi permintaan otomatis. Buka email di YOPmail untuk menyelesaikan CAPTCHA, lalu klik <strong>Coba Lagi</strong>.
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:4px">
+          <a href="${yopmailUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Buka di YOPmail
+          </a>
+          <button class="btn" onclick="readMessage('${msgId}')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+            Coba Lagi
+          </button>
+        </div>
+      </div>`;
+  }
+
+  function closeMsg() {
+    S.activeMsgId = null;
+    document.querySelectorAll('.email-item').forEach(el => el.classList.remove('active'));
+    get('emptyState').style.display = '';
+    get('msgViewer').classList.remove('visible');
+  }
+
+  // ── Delete item from inbox list ────────────────────────────────────
+  async function deleteItem(event, id) {
+    event.stopPropagation();
+    if (!confirm('Delete this email?')) return;
+    try {
+      const r = await fetch(`/api/message/${enc(S.email)}/${id}`, { method: 'DELETE' });
+      const d = await r.json();
+      if (d.success) {
+        toast('Email deleted', 'success');
+        if (S.activeMsgId === id) closeMsg();
+        await refreshInbox(true);
+      } else {
+        toast(d.error || 'Delete failed', 'error');
+      }
+    } catch { toast('Connection error', 'error'); }
+  }
+
+  // ── Delete from message viewer ─────────────────────────────────────
+  async function handleDeleteMsg() {
+    const id = get('deleteMsgBtn').dataset.id;
+    if (!id || !confirm('Delete this email?')) return;
+    try {
+      const r = await fetch(`/api/message/${enc(S.email)}/${id}`, { method: 'DELETE' });
+      const d = await r.json();
+      if (d.success) {
+        toast('Email deleted', 'success');
+        closeMsg();
+        await refreshInbox(true);
+      } else {
+        toast(d.error || 'Delete failed', 'error');
+      }
+    } catch { toast('Connection error', 'error'); }
+  }
+
+  // ── Clear All ──────────────────────────────────────────────────────
+  async function handleClearAll() {
+    if (!S.email || !confirm(`Delete ALL emails in ${S.email}?`)) return;
+    try {
+      const r = await fetch(`/api/inbox/${enc(S.email)}`, { method: 'DELETE' });
+      const d = await r.json();
+      toast(d.message || 'Inbox cleared', 'success');
+      closeMsg();
+      await refreshInbox(true);
+    } catch { toast('Connection error', 'error'); }
+  }
+
+  // ── Compose / Send ─────────────────────────────────────────────────
+  function openCompose() {
+    get('cFrom').value = S.email || '';
+    get('composeOverlay').classList.add('show');
+    setTimeout(() => get('cTo').focus(), 200);
+  }
+  function closeCompose() {
+    get('composeOverlay').classList.remove('show');
+  }
+
+  async function handleSend(e) {
+    e.preventDefault();
+    const btn  = get('sendBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin-inline"></span> Sending…';
+
+    const from    = get('cFrom').value.trim();
+    const to      = get('cTo').value.trim();
+    const subject = get('cSubject').value.trim();
+    const body    = get('cBody').value.trim();
+
+    try {
+      const r = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ from, to, subject, body })
+      });
+      const d = await r.json();
+      if (d.success) {
+        toast('✅ Email sent successfully!', 'success');
+        closeCompose();
+        get('composeForm').reset();
+        get('cFrom').value = S.email || '';
+      } else {
+        toast(d.error || 'Send failed', 'error');
+      }
+    } catch { toast('Connection error', 'error'); }
+    finally {
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2 15 22 11 13 2 9l20-7z"/></svg> Send Email';
+    }
+  }
+
+  // ── Countdown ──────────────────────────────────────────────────────
+  let countdownTimer = null;
+  function startCountdown() {
+    if (countdownTimer) clearInterval(countdownTimer);
+    S.countdown = 60;
+    tickCountdown();
+    countdownTimer = setInterval(async () => {
+      S.countdown--;
+      tickCountdown();
+      if (S.countdown <= 0) {
+        await refreshInbox(true);
+        S.countdown = 60;
+      }
+    }, 1000);
+  }
+  function resetCountdown() {
+    S.countdown = 60;
+    tickCountdown();
+  }
+  function tickCountdown() {
+    const el = get('countdown');
+    el.textContent = `${S.countdown}s`;
+    el.classList.toggle('urgent', S.countdown <= 8);
+  }
+
+  // ── Mobile navigation ──────────────────────────────────────────────
+  function mobileShow(view) {
+    const sidebar  = get('sidebar');
+    const backdrop = get('sidebarBackdrop');
+    document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('active'));
+    if (view === 'inbox') {
+      sidebar.classList.add('open');
+      backdrop.classList.add('visible');
+      get('mnavInbox').classList.add('active');
+    } else {
+      sidebar.classList.remove('open');
+      backdrop.classList.remove('visible');
+      get('mnavMsg').classList.add('active');
+    }
+  }
+
+  // ── Toast ──────────────────────────────────────────────────────────
+  function toast(msg, type = 'info') {
+    const el = document.createElement('div');
+    el.className = `toast toast-${type}`;
+    el.textContent = msg;
+    get('toasts').appendChild(el);
+    setTimeout(() => {
+      el.classList.add('toast-out');
+      setTimeout(() => el.remove(), 260);
+    }, 3500);
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+  function enc(s) { return encodeURIComponent(s); }
+  </script>
+</body>
+</html>
