@@ -729,7 +729,7 @@
           <span class="inbox-badge" id="inboxBadge">0</span>
         </div>
         <div class="refresh-group">
-          <span class="countdown-chip" id="countdown">30s</span>
+          <span class="countdown-chip" id="countdown">60s</span>
           <button class="icon-btn" id="refreshBtn" title="Refresh inbox (R)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
@@ -864,7 +864,7 @@
     email:       null,
     inbox:       [],
     activeMsgId: null,
-    countdown:   30,
+    countdown:   60,
     theme:       localStorage.getItem('yop_theme') || 'dark',
   };
 
@@ -1059,25 +1059,56 @@
 
   // ── Refresh Inbox ──────────────────────────────────────────────────
   async function refreshInbox(silent = false) {
-    if (!S.email) return;
+    if (!S.email) { console.warn('[Inbox] refreshInbox called but S.email is null'); return; }
     const btn = get('refreshBtn');
     btn.classList.add('spin');
     btn.disabled = true;
+    console.log(`[Inbox] Fetching inbox for: ${S.email}`);
     try {
       const r = await fetch(`/api/inbox/${enc(S.email)}`);
       const d = await r.json();
+      console.log('[Inbox] Response:', d);
       if (d.success) {
-        renderInbox(d.data);
-        if (!silent) toast('Inbox refreshed', 'info');
+        const count = (d.data?.inbox || []).length;
+        console.log(`[Inbox] ${count} email(s)${d.fromCache ? ' (cache)' : ''}${d.captchaRequired ? ' [CAPTCHA BLOCKED]' : ''}`);
+        if (d.captchaRequired) {
+          showInboxCaptchaNotice(d.yopmailUrl);
+          if (!silent) toast('⚠️ YOPmail minta CAPTCHA – buka di browser lalu refresh', 'warn');
+        } else {
+          renderInbox(d.data);
+          if (!silent) toast(d.fromCache ? `🗃️ ${count} email (cache)` : 'Inbox refreshed', 'info');
+        }
       } else {
+        console.error('[Inbox] Error from server:', d.error);
         if (!silent) toast(d.error || 'Refresh failed', 'error');
       }
-    } catch {
+    } catch (err) {
+      console.error('[Inbox] Fetch exception:', err);
       if (!silent) toast('Connection error', 'error');
     } finally {
       btn.classList.remove('spin');
       btn.disabled = false;
     }
+  }
+
+  function showInboxCaptchaNotice(yopmailUrl) {
+    const list = get('inboxList');
+    list.innerHTML = `
+      <div class="inbox-empty" style="padding:32px 16px">
+        <div class="inbox-empty-icon">🤖</div>
+        <div class="inbox-empty-title">CAPTCHA diperlukan</div>
+        <div class="inbox-empty-sub">
+          YOPmail memblokir request otomatis.<br>
+          1. Buka YOPmail di browser<br>
+          2. Selesaikan CAPTCHA<br>
+          3. Kembali &amp; klik Refresh
+        </div>
+        <a href="${yopmailUrl}" target="_blank" rel="noopener noreferrer"
+           class="btn btn-primary btn-sm" style="margin-top:10px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Buka YOPmail
+        </a>
+      </div>`;
   }
 
   // ── Render Inbox ───────────────────────────────────────────────────
@@ -1086,6 +1117,7 @@
     S.inbox = (data.inbox || []);
     const total = S.inbox.length;
     get('inboxBadge').textContent = total;
+    console.log(`[Render] renderInbox total=${total}`, S.inbox);
 
     const list = get('inboxList');
     if (total === 0) {
@@ -1093,7 +1125,7 @@
         <div class="inbox-empty">
           <div class="inbox-empty-icon">📭</div>
           <div class="inbox-empty-title">No emails yet</div>
-          <div class="inbox-empty-sub">Auto-checking every 30 seconds…</div>
+          <div class="inbox-empty-sub">Auto-checking every 60 seconds…</div>
         </div>`;
       return;
     }
@@ -1145,6 +1177,7 @@
       if (d.success) {
         showViewer(d.data);
         get('deleteMsgBtn').dataset.id = id;
+        if (d.data.captchaRequired) showCaptchaNotice(d.data.yopmailUrl, id);
       } else {
         toast(d.error || 'Could not load message', 'error');
         closeMsg();
@@ -1206,6 +1239,28 @@
       pre.textContent = Array.isArray(content) ? content.join('\n') : String(content);
       body.appendChild(pre);
     }
+  }
+
+  function showCaptchaNotice(yopmailUrl, msgId) {
+    const body = get('msgBody');
+    body.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:48px 24px;text-align:center;color:var(--text-muted)">
+        <div style="font-size:52px">🤖</div>
+        <div style="font-size:16px;font-weight:700;color:var(--text)">CAPTCHA diperlukan</div>
+        <div style="font-size:13px;max-width:320px;line-height:1.6">
+          YOPmail mendeteksi permintaan otomatis. Buka email di YOPmail untuk menyelesaikan CAPTCHA, lalu klik <strong>Coba Lagi</strong>.
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:4px">
+          <a href="${yopmailUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Buka di YOPmail
+          </a>
+          <button class="btn" onclick="readMessage('${msgId}')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+            Coba Lagi
+          </button>
+        </div>
+      </div>`;
   }
 
   function closeMsg() {
@@ -1308,19 +1363,19 @@
   let countdownTimer = null;
   function startCountdown() {
     if (countdownTimer) clearInterval(countdownTimer);
-    S.countdown = 30;
+    S.countdown = 60;
     tickCountdown();
     countdownTimer = setInterval(async () => {
       S.countdown--;
       tickCountdown();
       if (S.countdown <= 0) {
         await refreshInbox(true);
-        S.countdown = 30;
+        S.countdown = 60;
       }
     }, 1000);
   }
   function resetCountdown() {
-    S.countdown = 30;
+    S.countdown = 60;
     tickCountdown();
   }
   function tickCountdown() {

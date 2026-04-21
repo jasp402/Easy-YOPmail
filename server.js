@@ -58,15 +58,50 @@ app.get('/events', (req, res) => {
 });
 
 // ── Server state ───────────────────────────────────────────────────────────
-let activeEmail = null;
+const STATE_FILE = path.join(DATA, '.state.json');
+
+function loadState() {
+    try {
+        if (fs.existsSync(STATE_FILE)) {
+            const s = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+            return s.activeEmail || null;
+        }
+    } catch { /* ignore */ }
+    return null;
+}
+
+function saveState(email) {
+    try { writeJson(STATE_FILE, { activeEmail: email }); } catch { /* ignore */ }
+}
+
+let activeEmail = loadState();
+if (activeEmail) console.log(`[State] Restored active email: ${activeEmail}`);
 
 // ── API routes ─────────────────────────────────────────────────────────────
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+/** YOPmail returns totalEmails=-1 and an empty inbox when it shows a CAPTCHA page */
+function isCaptchaResponse(inbox) {
+    return inbox && (inbox.totalEmails < 0 || (inbox.totalEmails === 0 && inbox.fetchedEmailCount === 0 && inbox.pageCount === 0));
+}
+
+/** Read valid cached inbox (skip files saved from CAPTCHA responses) */
+function readValidCache(inboxFile) {
+    try {
+        if (!fs.existsSync(inboxFile)) return null;
+        const cached = JSON.parse(fs.readFileSync(inboxFile, 'utf8'));
+        if (isCaptchaResponse(cached)) { fs.unlinkSync(inboxFile); return null; }
+        if ((cached.inbox || []).length > 0) return cached;
+    } catch { /* ignore */ }
+    return null;
+}
 
 // GET /api/generate-email
 app.get('/api/generate-email', async (_req, res) => {
     try {
         const email = await easyYopmail.getMail();
         activeEmail  = email;
+        saveState(email);
         res.json({ success: true, email });
     } catch (err) {
         res.status(500).json({ success: false, error: err.message });
@@ -80,14 +115,37 @@ app.get('/api/inbox/:email', async (req, res) => {
         return res.status(400).json({ success: false, error: 'Invalid email address' });
     try {
         const inbox = await easyYopmail.getInbox(email);
-        // Track the most recently polled email so the auto-poller follows it
         activeEmail = email;
-        writeJson(
-            path.join(DATA, emailDir(email), 'inbox.json'),
-            { ...inbox, savedAt: new Date().toISOString() }
-        );
+        saveState(email);
+
+        const inboxFile = path.join(DATA, emailDir(email), 'inbox.json');
+
+        // CAPTCHA detected: totalEmails=-1 is YOPmail's indicator
+        if (isCaptchaResponse(inbox)) {
+            console.warn(`[Inbox API] CAPTCHA detected for ${email} (totalEmails=${inbox.totalEmails})`);
+            const cached = readValidCache(inboxFile);
+            if (cached) {
+                console.log(`[Inbox API] Serving cached ${cached.inbox.length} email(s)`);
+                return res.json({ success: true, data: cached, fromCache: true });
+            }
+            // No valid cache – tell the frontend CAPTCHA is blocking
+            return res.json({
+                success: true,
+                data: { ...inbox, inbox: [] },
+                captchaRequired: true,
+                yopmailUrl: `https://yopmail.com/en/inbox?login=${encodeURIComponent(email.split('@')[0])}`
+            });
+        }
+
+        writeJson(inboxFile, { ...inbox, savedAt: new Date().toISOString() });
         res.json({ success: true, data: inbox });
     } catch (err) {
+        const inboxFile = path.join(DATA, emailDir(email), 'inbox.json');
+        const cached = readValidCache(inboxFile);
+        if (cached) {
+            console.warn(`[Inbox API] Error fetching, serving cached: ${err.message}`);
+            return res.json({ success: true, data: cached, fromCache: true });
+        }
         res.status(500).json({ success: false, error: err.message });
     }
 });
@@ -100,12 +158,41 @@ app.get('/api/message/:email/:id', async (req, res) => {
         return res.status(400).json({ success: false, error: 'Invalid email address' });
     if (!ID_RE.test(id))
         return res.status(400).json({ success: false, error: 'Invalid message ID' });
+
+    const cacheFile = path.join(DATA, emailDir(email), `${id}.json`);
+
+    // Serve from local cache if already fetched successfully
+    if (fs.existsSync(cacheFile)) {
+        try {
+            const cached = JSON.parse(fs.readFileSync(cacheFile, 'utf8'));
+            // Only use cache if content is not a CAPTCHA response
+            const c = cached.content;
+            const cStr = Array.isArray(c) ? c.join(' ') : String(c || '');
+            if (!/complete the captcha/i.test(cStr)) {
+                return res.json({ success: true, data: cached, fromCache: true });
+            }
+        } catch { /* fall through to fetch */ }
+    }
+
     try {
         const message = await easyYopmail.readMessage(email, id, { format: 'html' });
-        writeJson(
-            path.join(DATA, emailDir(email), `${id}.json`),
-            { ...message, savedAt: new Date().toISOString() }
-        );
+
+        // Detect CAPTCHA response
+        const content = message.content;
+        const contentStr = Array.isArray(content) ? content.join(' ') : String(content || '');
+        if (/complete the captcha/i.test(contentStr)) {
+            const username = email.split('@')[0];
+            return res.json({
+                success: true,
+                data: {
+                    ...message,
+                    captchaRequired: true,
+                    yopmailUrl: `https://yopmail.com/en/mail?b=${encodeURIComponent(username)}&id=${encodeURIComponent(id)}`,
+                }
+            });
+        }
+
+        writeJson(cacheFile, { ...message, savedAt: new Date().toISOString() });
         res.json({ success: true, data: message });
     } catch (err) {
         res.status(500).json({ success: false, error: err.message });
@@ -156,22 +243,38 @@ app.post('/api/send', async (req, res) => {
     }
 });
 
-// ── Auto-poll every 30 s ───────────────────────────────────────────────────
+// ── Auto-poll every 60 s ───────────────────────────────────────────────────
+const POLL_INTERVAL = 60_000;
+
 setInterval(async () => {
     if (!activeEmail) return;
     try {
         const inbox = await easyYopmail.getInbox(activeEmail);
-        writeJson(
-            path.join(DATA, emailDir(activeEmail), 'inbox.json'),
-            { ...inbox, savedAt: new Date().toISOString() }
-        );
-        broadcast({ type: 'inbox_update', email: activeEmail, data: inbox });
         const n = inbox.inbox ? inbox.inbox.length : 0;
+
+        // Guard: if email count suddenly drops to 0 while we had emails before,
+        // YOPmail likely returned a CAPTCHA page — skip update to preserve inbox
+        const inboxFile = path.join(DATA, emailDir(activeEmail), 'inbox.json');
+        let prevCount = 0;
+        try {
+            if (fs.existsSync(inboxFile)) {
+                const prev = JSON.parse(fs.readFileSync(inboxFile, 'utf8'));
+                prevCount = (prev.inbox || []).length;
+            }
+        } catch { /* ignore */ }
+
+        if (isCaptchaResponse(inbox)) {
+            console.warn(`[Poll] CAPTCHA detected for ${activeEmail} (totalEmails=${inbox.totalEmails}), keeping last inbox`);
+            return;
+        }
+
+        writeJson(inboxFile, { ...inbox, savedAt: new Date().toISOString() });
+        broadcast({ type: 'inbox_update', email: activeEmail, data: inbox });
         console.log(`[Poll] ${activeEmail}  →  ${n} email(s)`);
     } catch (err) {
         console.error('[Poll Error]', err.message);
     }
-}, 30_000);
+}, POLL_INTERVAL);
 
 // ── Start ──────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
